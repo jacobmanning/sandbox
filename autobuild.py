@@ -18,9 +18,8 @@ from build_utils.python.logging import LOG_INFO, LOG_ERROR
 
 build_utils_dir = 'build_utils'
 toolchain_dir = 'toolchains'
-common_cmake = 'common.cmake'
 
-def build(project, arch, toolchain, common, pwd):
+def build(project, arch, toolchain, pwd):
     os.chdir(project)
 
     build_dir = 'build-{}'.format(arch)
@@ -30,7 +29,7 @@ def build(project, arch, toolchain, common, pwd):
 
     subprocess.run(['cmake', '..',
                     '-DCMAKE_TOOLCHAIN_FILE={}'.format(toolchain),
-                    '-DCOMMON_CMAKE={}'.format(common)])
+                    '-DCMAKE_INSTALL_PREFIX={}'.format('.')])
 
     subprocess.run(['make', 'install'])
 
@@ -54,12 +53,10 @@ def main(project, compiler, arch):
         LOG_ERROR('Compiler: {}, Architecture: {}'.format(compiler, arch))
         return
 
-    common_path = os.path.join(pwd, build_utils_dir, common_cmake)
-
     LOG_INFO('Building...')
 
     # Make the magic happen
-    build(project, arch, toolchain_file, common_path, pwd)
+    build(project, arch, toolchain_file, pwd)
 
     LOG_INFO('Done!')
 

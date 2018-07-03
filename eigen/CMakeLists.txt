@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
-
-if (COMMON_CMAKE)
-    include(${COMMON_CMAKE})
-endif()
+cmake_minimum_required(VERSION 3.2)
 
 project(Eigen_sandbox)
 
