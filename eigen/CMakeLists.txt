@@ -14,9 +14,13 @@ add_executable(first_program
                first_program.cc)
 target_link_libraries(first_program Eigen3::Eigen)
 
+# Matrices and vectors
+add_executable(example2
+               example2.cc)
+target_link_libraries(example2 Eigen3::Eigen)
+
 # Installation
 install(TARGETS hello_eigen
-        DESTINATION bin)
-
-install(TARGETS first_program
+                first_program
+                example2
         DESTINATION bin)
