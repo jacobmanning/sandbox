@@ -15,7 +15,7 @@ int main(int argc, const char** argv) {
     }
 
     cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Display Image", image);
+    cv::imshow(argv[1], image);
     cv::waitKey(0);
 
     return 0;
