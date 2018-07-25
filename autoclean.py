@@ -21,8 +21,10 @@ def clean(project, arch):
 
     if os.path.exists(build_dir):
         shutil.rmtree(build_dir)
+        return True
     else:
         LOG_ERROR('Could not find "{}"'.format(build_dir))
+        return False
 
 def main(project, arch):
     pwd = os.getcwd()
@@ -34,17 +36,20 @@ def main(project, arch):
     LOG_INFO('Cleaning project "{}"'.format(project))
 
     # Make the magic happen
-    clean(project, arch)
+    clean_status = clean(project, arch)
 
-    LOG_INFO('Done!')
+    if clean_status:
+        LOG_INFO('Done!')
+    else:
+        LOG_ERROR('Could not clean "{}"'.format(project))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('project', nargs=1, type=str,
                         action='store', help='The project directory to build')
     parser.add_argument('-a', '--arch', type=str, action='store',
-                        choices=['x86_64'], default='x86_64',
-                        help='Architecture to build for')
+                        choices=['x86_64', 'aarch64', 'arm'], default='x86_64',
+                        help='Architecture to clean')
     args = parser.parse_args()
 
     main(args.project[0], args.arch)

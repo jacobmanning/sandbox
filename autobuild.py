@@ -27,13 +27,16 @@ def build(project, arch, toolchain, pwd):
         os.mkdir(build_dir)
     os.chdir(build_dir)
 
-    subprocess.run(['cmake', '..',
-                    '-DCMAKE_TOOLCHAIN_FILE={}'.format(toolchain),
-                    '-DCMAKE_INSTALL_PREFIX={}'.format('.')])
+    return_value = subprocess.run(['cmake', '..',
+                                   '-DCMAKE_TOOLCHAIN_FILE={}'.format(toolchain),
+                                   '-DCMAKE_INSTALL_PREFIX={}'.format('.')])
+    if return_value.returncode != 0:
+        return return_value.returncode
 
-    subprocess.run(['make', 'install'])
+    return_value = subprocess.run(['make', 'install'])
 
     os.chdir(pwd)
+    return return_value.returncode
 
 def main(project, compiler, arch):
     pwd = os.getcwd()
@@ -56,9 +59,12 @@ def main(project, compiler, arch):
     LOG_INFO('Building...')
 
     # Make the magic happen
-    build(project, arch, toolchain_file, pwd)
+    build_status = build(project, arch, toolchain_file, pwd)
 
-    LOG_INFO('Done!')
+    if build_status == 0:
+        LOG_INFO('Done!')
+    else:
+        LOG_ERROR('CMake returned: {}'.format(build_status))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -68,7 +74,7 @@ if __name__ == "__main__":
                         choices=['GNU', 'Clang'], default='Clang',
                         help='The compiler to use')
     parser.add_argument('-a', '--arch', type=str, action='store',
-                        choices=['x86_64'], default='x86_64',
+                        choices=['x86_64', 'aarch64', 'arm'], default='x86_64',
                         help='Architecture to build for')
     args = parser.parse_args()
 
