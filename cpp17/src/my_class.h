@@ -43,6 +43,7 @@ public:
     int get_log_id_at(int idx) const { return log_ids_.at(idx); }
 
     int& get_log_id_at_mutable(int idx) { return log_ids_.at(idx); }
+
     std::string get_tag() const { return tag_; }
 
     int get_id() const { return id_; }

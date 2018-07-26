@@ -5,6 +5,9 @@ target_link_libraries(futures pthread)
 add_executable(lambdas
                lambdas.cc)
 
+add_executable(optional
+               optional.cc)
+
 add_executable(pairs
                pairs.cc)
 
@@ -28,6 +31,7 @@ add_executable(vectors
 
 install(TARGETS futures
                 lambdas
+                optional
                 pairs
                 rangefor
                 references
