@@ -1,8 +1,51 @@
 #include <my_class.h>
+#include <logging.h>
 
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
+
+class DummyClass {
+public:
+    DummyClass() : DummyClass{0} {}
+    DummyClass(int id) : shared_id_{id} {
+        my_class_ptr_ = std::make_shared<MyClass>("dummy", id);
+    }
+
+    DummyClass(int id, std::shared_ptr<MyClass> class_ptr)
+        : shared_id_{id}, my_class_ptr_{class_ptr} {}
+
+    void increment_shared_id() {
+        shared_id_++;
+    }
+
+    int get_shared_id() const {
+        return shared_id_;
+    }
+
+    std::shared_ptr<MyClass> get_my_class_ptr() const {
+        return my_class_ptr_;
+    }
+
+private:
+    int shared_id_{0};
+    std::vector<int> values_{};
+    std::shared_ptr<MyClass> my_class_ptr_{};
+};
+
+int main() {
+    auto dummy_ptr = std::make_shared<DummyClass>();
+    auto dummy_ptr_2 = std::make_shared<DummyClass>(dummy_ptr->get_shared_id(),
+                            dummy_ptr->get_my_class_ptr());
+
+    LOG_INFO("DummyClass shared id: " << dummy_ptr->get_shared_id());
+    dummy_ptr->increment_shared_id();
+    LOG_INFO("After incrementing original pointer: " << dummy_ptr->get_shared_id());
+    dummy_ptr_2->increment_shared_id();
+    LOG_INFO("After incrementing copy pointer: " << dummy_ptr->get_shared_id());
+
+}
 
 int multiply_myclass_id(const MyClass& multiplicand, const int multiplier) {
     return multiplicand.get_id() * multiplier;
@@ -17,7 +60,7 @@ std::shared_ptr<MyClass> copy_shared_ptr(std::shared_ptr<MyClass> original) {
     return std::shared_ptr<MyClass>(original);
 }
 
-int main() {
+int old_main() {
     auto test_class_ptr = std::make_shared<MyClass>("test_ptr", 1);
     auto test_class_ref = MyClass("test_ref", 2);
 
@@ -35,4 +78,5 @@ int main() {
     auto test_class_ptr2 = copy_shared_ptr(test_class_ptr);
     std::cout << "Shared pointer use_count() = " << test_class_ptr2.use_count()
               << "\n";
+    return 0;
 }

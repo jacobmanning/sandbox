@@ -13,7 +13,7 @@ int my_call(void) {
 
 int main(int argc, const char** argv) {
     // Create an async call to the future
-    std::future<int> x = std::async(my_call);
+    auto x = std::async(my_call);
 
     // Show that we are running in main
     std::cout << "Hello from main!" << std::endl;

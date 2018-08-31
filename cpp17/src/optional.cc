@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <optional>
 #include <string>
@@ -7,10 +6,18 @@
 class User {
 public:
    User();
-   User(const std::string& name, int id) : name_{name}, unique_id_{id} {}
+   User(const std::string& name, const int id) : name_{name}, unique_id_{id} {}
+   User(const User& user) : name_{user.get_name()}, unique_id_{user.get_id()} {}
 
    std::string get_name() const { return name_; }
+
    int get_id() const { return unique_id_; }
+
+   friend std::ostream& operator<<(std::ostream& os, const User& user) {
+      os << "Name: " << user.get_name() << ", ID: " << user.get_id()
+         << std::endl;
+      return os;
+   }
 
 private:
    std::string name_{"default"};
@@ -27,6 +34,9 @@ public:
       }
    }
 
+   UserDatabase(const UserDatabase& udb) : users_{udb.users_} {}
+   UserDatabase(UserDatabase&& udb) : users_{std::move(udb.users_)} {}
+
    bool add_user(const std::string& name) {
       if (!get_user(name)) {
          users_.emplace_back(name, users_.size());
@@ -35,7 +45,7 @@ public:
       return false;
    }
 
-   std::optional<User> get_user(const std::string& name) {
+   std::optional<User> get_user(const std::string& name) const {
       for (const auto& user : users_) {
          if (user.get_name() == name) {
             return user;
@@ -49,19 +59,16 @@ private:
 };
 
 int main() {
-   auto db = UserDatabase({"foo", "bar", "woo"});
+   const auto db = UserDatabase({"foo", "bar", "woo"});
+   const auto names = {"woo", "test"};
 
-   if (auto maybe_user = db.get_user("woo"); maybe_user) {
-      std::cout << "Found user 'woo' with id: " << maybe_user.value().get_id()
-                << std::endl;
-   } else {
-      std::cerr << "Could not find user 'woo'" << std::endl;
-   }
-
-   if (auto maybe_user = db.get_user("test"); maybe_user) {
-      std::cout << "Found user 'test' with id: " << maybe_user.value().get_id()
-                << std::endl;
-   } else {
-      std::cerr << "Could not find user 'test'" << std::endl;
+   for (const auto& name : names) {
+      if (auto maybe_user = db.get_user(name); maybe_user) {
+         // const auto& user = *maybe_user;
+         // std::cout << "Found: " << user;
+         std::cout << "Found: " << *maybe_user;
+      } else {
+         std::cout << "Could not find: " << name << std::endl;
+      }
    }
 }

@@ -12,7 +12,7 @@ int main(int argc, const char** argv) {
     auto v = std::vector<int>{1, 2, 3, 4, 5};
 
     // Square each value in v
-    for (int& a : v) {
+    for (auto& a : v) {
         // Can modify the actual variable because we have a reference
         a = a * a;
     }

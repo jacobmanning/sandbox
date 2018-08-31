@@ -22,8 +22,8 @@ void use_my_class(MyClass& my_obj) {
 }
 
 int main() {
-    auto my_obj_m = MyClass { "my_name", 1337 };
-    // const auto my_obj = MyClass { "my_name", 1337 };
+    auto my_obj_m = MyClass{"my_name", 1337};
+    // const auto my_obj = MyClass{"my_name", 1337};
 
     my_obj_m.append_log_id(3);
     my_obj_m.append_log_id(2);
@@ -40,7 +40,8 @@ int main() {
     auto& x = my_obj_m.get_log_id_at_mutable(0);
     x *= 3;
     std::cout << "x = " << x << std::endl;
-    std::cout << "my_obj.get_lod_id_at(0) = " << my_obj_m.get_log_id_at(0) << std::endl;
+    std::cout << "my_obj.get_lod_id_at(0) = " << my_obj_m.get_log_id_at(0)
+              << std::endl;
 
     auto my_new_obj = std::move(my_obj_m);
 

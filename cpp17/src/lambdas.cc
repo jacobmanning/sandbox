@@ -11,7 +11,7 @@
 #define CPP14 201402L
 #define CPP11 201103L
 
-int main(int argc, const char **argv) {
+int main(int argc, const char** argv) {
     // Vector with some integers
     auto v = std::vector<int>{-1, -2, 3, 4, 5};
     util::print_vector(v);
