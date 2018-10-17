@@ -16,7 +16,7 @@ template <class T>
 void print_vector(const std::vector<T>& v) {
     // Print all elements
     std::for_each(std::begin(v), std::end(v),
-                  [](T n) { std::cout << n << " "; });
+                  [](const T& n) { std::cout << n << " "; });
 
     // Print separator
     std::cout << "\n\n";
