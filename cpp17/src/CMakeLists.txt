@@ -23,6 +23,9 @@ add_executable(shared_ptrs
 add_executable(smart_ptrs
                smart_ptrs.cc)
 
+add_executable(stl
+               stl.cc)
+
 add_executable(tuples
                tuples.cc)
 
@@ -37,6 +40,7 @@ install(TARGETS futures
                 references
                 shared_ptrs
                 smart_ptrs
+                stl
                 tuples
                 vectors
         DESTINATION bin)
