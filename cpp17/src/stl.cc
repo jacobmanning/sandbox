@@ -5,7 +5,7 @@
 #include <util.h>
 
 // All demo functions should follow this format
-typedef void (*demo_function_t)(void);
+using demo_function_t = void(*)(void);
 
 void transform_demo() {
   // Config parameters
