@@ -36,10 +36,10 @@ def LOG(level, msg):
         # Check if the requested log level is greater than or equal to
         # the minimum logging level
         if __module.log_levels[level] >= __module.min_log_level:
-            print('[', level, ']: ', msg)
+            print('[', level, '] ', msg)
     else:
         # If the level is not a default level, always print it
-        print('[', level, ']: ', msg)
+        print('[', level, '] ', msg)
 
 def LOG_ERROR(msg):
     LOG('ERROR', msg)
