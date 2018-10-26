@@ -82,7 +82,7 @@ def main(command, target, compiler, arch):
         build(target, compiler, arch)
     elif command == 'clean':
         LOG_INFO('Cleaning {}...'.format(target))
-        clean()
+        clean(target, arch)
     else:
         LOG_ERROR('Command: "{}" is not supported yet!'.format(command))
 
