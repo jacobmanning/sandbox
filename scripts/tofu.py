@@ -71,8 +71,9 @@ def clean(target, arch):
     '''
     Cleans generated files
     '''
-    shutil.rmtree(os.path.join(os.getcwd(),
-                  os.path.join(target, 'build-{}'.format(arch))))
+    if target is not None:
+        shutil.rmtree(os.path.join(os.getcwd(),
+                      os.path.join(target, 'build-{}'.format(arch))))
     LOG_INFO('Done!')
 
 def main(command, target, compiler, arch):

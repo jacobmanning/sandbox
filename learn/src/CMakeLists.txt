@@ -1,13 +1,6 @@
-add_executable(template_intro
-               template_intro.cc)
-
-add_executable(template_meta_1
-               template_meta_1.cc)
-
-add_executable(template_meta_2
-               template_meta_2.cc)
-
-install(TARGETS template_intro
-                template_meta_1
-                template_meta_2
-        DESTINATION bin)
+add_subdirectory(stl_compliant)
+add_subdirectory(templates)
+# add_subdirectory(template_meta)
+add_subdirectory(variadic_templates)
+add_subdirectory(crtp)
+add_subdirectory(fluent_cpp)

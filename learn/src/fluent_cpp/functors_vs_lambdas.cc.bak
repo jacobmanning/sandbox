@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath>
+
+class Product
+{
+public:
+  Product(double density)
+    : density_{density} {};
+
+  double get_density() const {
+    return density_;
+  }
+
+private:
+  double density_;
+};
+
+class Material
+{
+public:
+  Material(double max_pressure)
+    : max_pressure_{max_pressure} {};
+
+  double get_max_pressure() const {
+    return max_pressure_;
+  }
+
+private:
+  double max_pressure_;
+};
+
+class Box
+{
+public:
+  Box(double length, double width, double height, Material material)
+    : length_{length}, width_{width}, height_{height}, material_{material} {};
+
+  double get_volume() const {
+    return length_ * width_ * height_;
+  }
+
+  double get_area() const {
+    return length_ * width_;
+  }
+
+  double get_sides_surface() const {
+    return 6 * pow(get_area(), 2);
+  }
+
+  Material get_material() const {
+    return material_;
+  }
+
+private:
+  double length_;
+  double width_;
+  double height_;
+  Material material_;
+};
