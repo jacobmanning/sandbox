@@ -1,6 +1,10 @@
 *.swp
 */build-*/
+build-*/
 *__pycache__
 test/
 tmux-*.log
 output/
+
+third_party/
+*/third_party/
