@@ -28,11 +28,11 @@ auto resists(const Product& product)
 {
   return [product] (const Box& box)
   {
-      const double volume = box.get_volume();
-      const double weight = volume * product.get_density();
-      const double sides_surface = box.get_sides_surface();
-      const double pressure = weight / sides_surface;
-      const double max_pressure = box.get_material().get_max_pressure();
+      const auto volume = box.get_volume();
+      const auto weight = volume * product.get_density();
+      const auto sides_surface = box.get_sides_surface();
+      const auto pressure = weight / sides_surface;
+      const auto max_pressure = box.get_material().get_max_pressure();
       return pressure <= max_pressure;
   };
 }
