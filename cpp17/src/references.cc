@@ -39,7 +39,7 @@ int main() {
 
     auto& x = my_obj_m.get_log_id_at_mutable(0);
     x *= 3;
-    std::cout << "x = " << x << std::endl;
+    std::cout << "x = " << x << '\n';
     std::cout << "my_obj.get_lod_id_at(0) = " << my_obj_m.get_log_id_at(0)
               << std::endl;
 
@@ -47,9 +47,9 @@ int main() {
 
     my_obj_m.append_log_id(4);
     auto& y = my_obj_m.get_log_id_at_mutable(3);
-    std::cout << "y = " << y << std::endl;
+    std::cout << "y = " << y << '\n';
 
     my_new_obj.append_log_id(6);
     auto& z = my_new_obj.get_log_id_at_mutable(3);
-    std::cout << "z = " << z << std::endl;
+    std::cout << "z = " << z << '\n';
 }

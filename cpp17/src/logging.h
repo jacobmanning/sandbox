@@ -10,7 +10,7 @@
 
 #define LOG(level, message)                                        \
     std::clog << "[" << level << "] " << _FILE << " (" << __LINE__ \
-              << "): " << message << std::endl;
+              << "): " << message << '\n';
 
 #define LOG_DEBUG(message) LOG("DEBUG", message)
 
