@@ -5,6 +5,4 @@ add_executable(functors_vs_lambdas
                functors_vs_lambdas.cc)
 
 install(TARGETS functors_vs_lambdas
-                # simple_example
-                # tree_example
         DESTINATION bin)

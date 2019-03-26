@@ -10,6 +10,10 @@ target_include_directories(units PUBLIC
 target_link_libraries(units
                       named_type)
 
+add_library(crtp INTERFACE)
+target_include_directories(crtp INTERFACE
+                           crtp/)
+
 add_library(circle
             circle/circle.cc)
 target_include_directories(circle PUBLIC
@@ -40,7 +44,33 @@ add_executable(references
 target_link_libraries(references
                       named_type)
 
+add_executable(lambdas
+               lambdas.cc)
+target_link_libraries(lambdas
+                      named_type)
+
+add_library(traits INTERFACE)
+target_link_libraries(traits INTERFACE
+                      crtp)
+target_include_directories(traits INTERFACE
+                           traits/)
+
+add_executable(inheritance
+               inheritance.cc)
+target_link_libraries(inheritance
+                      named_type
+                      traits)
+
+add_executable(hashable
+               hashable.cc)
+target_link_libraries(hashable
+                      named_type
+                      traits)
+
 install(TARGETS constructors
                 interfaces
                 references
+                lambdas
+                inheritance
+                hashable
         DESTINATION bin)

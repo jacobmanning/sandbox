@@ -20,4 +20,3 @@ const T& named_type<T, Parameter>::get() const
 {
   return value_;
 }
-
