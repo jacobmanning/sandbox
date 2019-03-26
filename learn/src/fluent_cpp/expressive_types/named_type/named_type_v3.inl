@@ -24,3 +24,17 @@ const T& named_type<T, Parameter, Skills...>::get() const
 {
   return value_;
 }
+
+template <typename T, typename Parameter,
+          template <typename> class... Skills>
+named_type<T, Parameter, Skills...>::operator T&()
+{
+  return get();
+}
+
+template <typename T, typename Parameter,
+          template <typename> class... Skills>
+named_type<T, Parameter, Skills...>::operator const T&() const
+{
+  return get();
+}

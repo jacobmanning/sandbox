@@ -15,6 +15,12 @@ struct Addable : util::crtp<T, Addable>
 };
 
 template <typename T>
+struct Subtractable : util::crtp<T, Subtractable>
+{
+  T operator-(const T& other) const;
+};
+
+template <typename T>
 struct Printable : util::crtp<T, Printable>
 {
   void print(std::ostream& os) const;
@@ -33,6 +39,12 @@ struct Multiplicable : util::crtp<T, Multiplicable>
 };
 
 template <typename T>
+struct Divisible : util::crtp<T, Divisible>
+{
+  T operator/(const T& other) const;
+};
+
+template <typename T>
 struct Comparable : util::crtp<T, Comparable>
 {
   bool operator<(const T& other) const;
@@ -47,6 +59,57 @@ template <typename T>
 struct Hashable
 {
   static constexpr bool is_hashable = true;
+};
+
+template <typename NamedType_>
+struct FunctionCallable;
+
+template <typename NamedType_>
+struct MethodCallable;
+
+template <typename T, typename Tag,
+          template <typename> class... Skills>
+struct FunctionCallable<util::v3::named_type<T, Tag, Skills...>> :
+  util::crtp<util::v3::named_type<T, Tag, Skills...>, FunctionCallable>
+{
+
+  operator const T&() const;
+  operator T&();
+};
+
+template <typename T, typename Tag,
+          template <typename> class... Skills>
+struct MethodCallable<util::v3::named_type<T, Tag, Skills...>> :
+  util::crtp<util::v3::named_type<T, Tag, Skills...>, MethodCallable>
+{
+  const T* operator->() const;
+  T* operator->();
+};
+
+template <typename T, typename Tag,
+          typename Converter,
+          template <typename> class... Skills>
+struct FunctionCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>> :
+  util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, FunctionCallable>
+{
+
+  operator const T&() const;
+  operator T&();
+};
+
+template <typename T, typename Tag,
+          typename Converter,
+          template <typename> class... Skills>
+struct MethodCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>> :
+  util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, MethodCallable>
+{
+  const T* operator->() const;
+  T* operator->();
+};
+
+template <typename NamedType_>
+struct Callable : FunctionCallable<NamedType_>, MethodCallable<NamedType_>
+{
 };
 
 #include <traits.inl>

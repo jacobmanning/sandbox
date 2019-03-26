@@ -3,16 +3,23 @@ add_library(named_type INTERFACE)
 target_include_directories(named_type INTERFACE
                            named_type/)
 
+add_library(crtp INTERFACE)
+target_include_directories(crtp INTERFACE
+                           crtp/)
+
+add_library(traits INTERFACE)
+target_link_libraries(traits INTERFACE
+                      crtp)
+target_include_directories(traits INTERFACE
+                           traits/)
+
 add_library(units
             units/units.cc)
 target_include_directories(units PUBLIC
                            units/)
 target_link_libraries(units
-                      named_type)
-
-add_library(crtp INTERFACE)
-target_include_directories(crtp INTERFACE
-                           crtp/)
+                      named_type
+                      traits)
 
 add_library(circle
             circle/circle.cc)
@@ -49,12 +56,6 @@ add_executable(lambdas
 target_link_libraries(lambdas
                       named_type)
 
-add_library(traits INTERFACE)
-target_link_libraries(traits INTERFACE
-                      crtp)
-target_include_directories(traits INTERFACE
-                           traits/)
-
 add_executable(inheritance
                inheritance.cc)
 target_link_libraries(inheritance
@@ -67,10 +68,25 @@ target_link_libraries(hashable
                       named_type
                       traits)
 
+add_executable(conversions
+               conversions.cc)
+target_link_libraries(conversions
+                      named_type
+                      traits
+                      units)
+
+add_executable(callable
+               callable.cc)
+target_link_libraries(callable
+                      named_type
+                      traits)
+
 install(TARGETS constructors
                 interfaces
                 references
                 lambdas
                 inheritance
                 hashable
+                conversions
+                callable
         DESTINATION bin)

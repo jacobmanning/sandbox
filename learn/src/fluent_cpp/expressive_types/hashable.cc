@@ -10,6 +10,11 @@ using SerialNumber =
                    traits::Comparable, traits::Hashable,
                    traits::Printable>;
 
+using SerialNumberV2 =
+  util::convertible_named_type<int, struct SerialNumberTag,
+                               traits::Comparable, traits::Hashable,
+                               traits::Printable>;
+
 template <typename T, typename U>
 bool contains_key(const std::unordered_map<T, U>& my_map,
                   const T& value)
@@ -43,4 +48,14 @@ int main()
   check_key_and_print(my_map, SerialNumber{"BB22"});
   // Key is NOT in map
   check_key_and_print(my_map, SerialNumber{"CC33"});
+
+  const auto my_map_v2 = std::unordered_map<SerialNumberV2, int>{
+    { SerialNumberV2{30}, 10 },
+    { SerialNumberV2{40}, 20 }
+  };
+
+  // Key is in map
+  check_key_and_print(my_map_v2, SerialNumberV2{30});
+  // Key is NOT in map
+  check_key_and_print(my_map_v2, SerialNumberV2{50});
 }
