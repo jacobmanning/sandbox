@@ -8,3 +8,5 @@ output/
 
 third_party/
 */third_party/
+
+compile_commands.json

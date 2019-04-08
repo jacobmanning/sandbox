@@ -6,6 +6,7 @@ from __future__ import print_function
 
 import os
 import sys
+import glob
 import shutil
 import argparse
 import subprocess
@@ -13,7 +14,7 @@ import subprocess
 # Append to module search path
 sys.path.append(os.getcwd())
 
-from build_utils.python.logging import LOG_INFO, LOG_ERROR
+from build_utils.python.logging import LOG_INFO, LOG_ERROR, LOG_DEBUG
 
 # Configuration of build directories
 config = {
@@ -44,8 +45,6 @@ def build(target, compiler, arch):
         LOG_ERROR('Compiler: {}, Architecture: {}'.format(compiler, arch))
         return
 
-    LOG_INFO('Building...')
-
     pwd = os.getcwd()
     os.chdir(target)
 
@@ -54,18 +53,39 @@ def build(target, compiler, arch):
         os.mkdir(build_dir)
     os.chdir(build_dir)
 
-    return_value = subprocess.run(['cmake', '..',
-                                   '-DCMAKE_TOOLCHAIN_FILE={}'.format(toolchain_file),
-                                   '-DCMAKE_INSTALL_PREFIX={}'.format('.')])
+    LOG_INFO('Building...')
+
+    cmake_args = ['cmake', '..',
+                  '-DCMAKE_TOOLCHAIN_FILE={}'.format(toolchain_file),
+                  '-DCMAKE_INSTALL_PREFIX={}'.format('.')]
+    return_value = subprocess.run(cmake_args)
+
     if return_value.returncode != 0:
         return return_value.returncode
 
-    return_value = subprocess.run(['make', 'install'])
+    make_args = ['make', 'install']
+    return_value = subprocess.run(make_args)
 
     os.chdir(pwd)
 
     if return_value.returncode == 0:
         LOG_INFO('Done!')
+
+def analyze(target, arch):
+    rel_build_dir = 'build-{}'.format(arch)
+    build_dir_path = os.path.join(target, rel_build_dir)
+
+    if not os.path.exists(build_dir_path):
+        LOG_ERROR('Build directory for target {} does not exist!'.format(target))
+        return
+
+    tidy_args = ['clang-tidy', '-p', '{}'.format(build_dir_path),
+            # '-checks=*', '-header-filter=.*']
+            '-checks=bugprone-*,cppcoreguidelines-*,clang-analyzer-*,google-*,hicpp-*,misc-*,modernize-*,performance-*,readability-*', '-header-filter=.*']
+
+    for f in glob.glob(os.path.join(target, '**/*.cc'), recursive=True):
+        these_tidy_args = tidy_args + [f]
+        result = subprocess.run(these_tidy_args, stdout=sys.stdout, stderr=sys.stderr)
 
 def clean(target, arch):
     '''
@@ -81,6 +101,8 @@ def main(command, target, compiler, arch):
 
     if command == 'build':
         build(target, compiler, arch)
+    elif command == 'analyze':
+        analyze(target, arch)
     elif command == 'clean':
         LOG_INFO('Cleaning {}...'.format(target))
         clean(target, arch)
@@ -92,7 +114,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('command', nargs=1, type=str,
                         action='store', help='The command to run',
-                        choices=['build', 'clean', 'add'])
+                        choices=['build', 'analyze', 'clean'])
     parser.add_argument('target', nargs='?', type=str, action='store',
                         default=None,
                         help='The target path to build/clean')
