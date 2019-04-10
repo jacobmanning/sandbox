@@ -3,13 +3,14 @@
  * @brief   std::pair functions
  */
 
-#include <util.h>
+#include "util.h"
+
 #include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
 
-int main(int argc, const char** argv) {
+int main() {
     // Make a basic pair
     auto p1 = std::make_pair(10, 10);
     // Print the values

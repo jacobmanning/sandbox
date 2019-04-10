@@ -11,7 +11,3 @@ const T& crtp<T, CRTPType>::underlying() const
 {
   return static_cast<const T&>(*this);
 }
-
-template <typename T,
-          template <typename> class CRTPType>
-crtp<T, CRTPType>::crtp() {}

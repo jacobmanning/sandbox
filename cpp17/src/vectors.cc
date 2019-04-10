@@ -3,7 +3,8 @@
  * @brief   std::vector functions
  */
 
-#include <util.h>
+#include "util.h"
+
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
@@ -11,14 +12,14 @@
 #include <string>
 #include <vector>
 
-int main(int argc, const char** argv) {
+int main() {
     // Create a sample vector
     auto v = std::vector<std::string>{"foo", "bar"};
     std::cout << "My word vector" << std::endl;
     util::print_vector(v);
 
     // Seed random number generator
-    std::srand(unsigned(std::time(0)));
+    std::srand(unsigned(std::time(nullptr)));
 
     // Init vectors for our numbers
     auto rand_vec = std::vector<int>(8);

@@ -72,8 +72,9 @@ template <typename T, typename Tag,
 struct FunctionCallable<util::v3::named_type<T, Tag, Skills...>> :
   util::crtp<util::v3::named_type<T, Tag, Skills...>, FunctionCallable>
 {
-
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
 };
 
@@ -92,8 +93,9 @@ template <typename T, typename Tag,
 struct FunctionCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>> :
   util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, FunctionCallable>
 {
-
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
 };
 

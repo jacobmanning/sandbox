@@ -5,12 +5,14 @@
 #include <cstring>
 #include <iostream>
 
+// NOLINTNEXTLINE
 #define _FILE \
-    std::string(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+    std::string(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__) // NOLINT
 
+// NOLINTNEXTLINE
 #define LOG(level, message)                                        \
     std::clog << "[" << level << "] " << _FILE << " (" << __LINE__ \
-              << "): " << message << '\n';
+              << "): " << message << '\n';  // NOLINT
 
 #define LOG_DEBUG(message) LOG("DEBUG", message)
 

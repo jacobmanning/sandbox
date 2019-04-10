@@ -11,7 +11,7 @@ struct crtp
   const T& underlying() const;
 
 private:
-  crtp();
+  crtp() = default;
   friend CRTPType<T>;
 };
 

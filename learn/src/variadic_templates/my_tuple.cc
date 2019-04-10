@@ -9,7 +9,8 @@ template <class T, class... Ts>
 struct Tuple<T, Ts...> : Tuple<Ts...> {
   T tail_;
 
-  Tuple(T t, Ts... ts) : Tuple<Ts...>(ts...), tail_{t} {}
+  explicit Tuple(T t, Ts... ts) :
+    Tuple<Ts...>(ts...), tail_{t} {}
 };
 
 template <std::size_t, class>

@@ -31,7 +31,7 @@ class Circle
 {
 public:
   explicit Circle(Radius radius);
-  explicit Circle(Diameter radius);
+  explicit Circle(Diameter diameter);
 
   void set_radius(double radius);
 
@@ -58,7 +58,7 @@ class Circle
 {
 public:
   explicit Circle(Radius radius);
-  explicit Circle(Diameter radius);
+  explicit Circle(Diameter diameter);
 
   void set_radius(double radius);
 
@@ -70,4 +70,4 @@ private:
   double radius_;
 };
 
-}  // namespace v1
+}  // namespace v2

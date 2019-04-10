@@ -1,7 +1,8 @@
-#include <my_class.h>
+#include "my_class.h"
 #include <iostream>
 
 // void use_my_class(const MyClass& my_obj) {
+// NOLINTNEXTLINE(google-runtime-references)
 void use_my_class(MyClass& my_obj) {
     // Get const reference to log_ids_ vector
     // const auto& obj_vec = my_obj.get_log_ids();
@@ -43,7 +44,8 @@ int main() {
     std::cout << "my_obj.get_lod_id_at(0) = " << my_obj_m.get_log_id_at(0)
               << std::endl;
 
-    auto my_new_obj = std::move(my_obj_m);
+    // auto my_new_obj = std::move(my_obj_m);
+    auto my_new_obj = my_obj_m;
 
     my_obj_m.append_log_id(4);
     auto& y = my_obj_m.get_log_id_at_mutable(3);

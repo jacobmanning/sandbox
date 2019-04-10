@@ -3,7 +3,7 @@
 class Product
 {
 public:
-  Product(double density);
+  explicit Product(double density);
   double get_density() const;
 
 private:
@@ -13,7 +13,7 @@ private:
 class Material
 {
 public:
-  Material(double max_pressure);
+  explicit Material(double max_pressure);
   double get_max_pressure() const;
 
 private:

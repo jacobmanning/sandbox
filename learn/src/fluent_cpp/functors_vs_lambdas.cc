@@ -56,6 +56,7 @@ int main()
   std::copy_if(std::begin(boxes), std::end(boxes),
     std::back_inserter(good_boxes_functor), Resists(product));
 
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
   assert(good_boxes_lambda.size() == good_boxes_functor.size());
   std::cout << "Both vectors are size " << good_boxes_lambda.size() << "\n";
 }

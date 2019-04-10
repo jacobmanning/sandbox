@@ -36,6 +36,7 @@ private:
 
 #include <named_type_v1.inl>
 
+// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v1
 
 namespace util::v2
@@ -61,6 +62,7 @@ private:
 
 #include <named_type_v2.inl>
 
+// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v2
 
 namespace util::v3
@@ -82,7 +84,9 @@ public:
   T& get();
   const T& get() const;
 
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
 
 private:
@@ -91,6 +95,7 @@ private:
 
 #include <named_type_v3.inl>
 
+// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v3
 
 namespace util::v4
@@ -141,12 +146,15 @@ public:
   T& get();
   const T& get() const;
 
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
 
   using UnderlyingType = T;
 
   template <typename Converter2>
+  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator named_type_impl<T, Tag, Converter2, Skills...>() const;
 
   template <T(*f)(T), T(*g)(T)>
@@ -185,6 +193,7 @@ using multiple_of = typename StrongType::template GetConvertible<
 template <typename StrongType, typename Converter>
 using convertible_to = typename StrongType::template GetConvertible<Converter>;
 
+// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v4
 
 namespace util

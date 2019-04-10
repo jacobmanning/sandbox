@@ -3,11 +3,12 @@
  * @brief   std::tuple functions
  */
 
-#include <util.h>
+#include "util.h"
+
 #include <iostream>
 #include <tuple>
 
-int main(int argc, const char** argv) {
+int main() {
     // Create a tuple
     auto my_tuple = std::make_tuple(std::string{"Jacob"}, 20, 0);
     // Print original values

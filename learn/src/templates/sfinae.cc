@@ -41,13 +41,13 @@ struct enable_if<true, T> {
 
 template <class T,
           typename enable_if<std::is_integral<T>::value, T>::type* = nullptr>
-void do_stuff(T& t) {
+void do_stuff(T& /*unused*/) {
   std::cout << "do_stuff integral" << "\n";
 }
 
 template <class T,
           typename enable_if<std::is_class<T>::value, T>::type* = nullptr>
-void do_stuff(T& t) {
+void do_stuff(T& /*unused*/) {
   std::cout << "do_stuff class types" << "\n";
 }
 
@@ -58,13 +58,13 @@ using enable_if_t = typename enable_if<B, T>::type;
 
 template <class T,
           enable_if_t<std::is_integral<T>::value>* = nullptr>
-void do_stuff_v2(T& t) {
+void do_stuff_v2(T& /*unused*/) {
   std::cout << "do_stuff_v2 integral" << "\n";
 }
 
 template <class T,
           enable_if_t<std::is_class<T>::value>* = nullptr>
-void do_stuff_v2(T& t) {
+void do_stuff_v2(T& /*unused*/) {
   std::cout << "do_stuff_v2 class types" << "\n";
 }
 

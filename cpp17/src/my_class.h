@@ -2,7 +2,7 @@
 #ifndef MY_CLASS_H_
 #define MY_CLASS_H_
 
-#include <int_wrapper.h>
+#include "int_wrapper.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,9 +14,9 @@ private:
     int id_;
 
 public:
-    MyClass() : MyClass("default"){};
-    MyClass(std::string tag) : MyClass(tag, 0){};
-    MyClass(std::string tag, int id) : tag_{tag}, id_{id} {
+    MyClass() : MyClass("default") {};
+    explicit MyClass(std::string tag) : MyClass(std::forward<std::string>(tag), 0) {};
+    MyClass(std::string tag, int id) : tag_{std::move(tag)}, id_{id} {
         std::cout << "Constructing MyClass\n";
     }
 
@@ -30,11 +30,14 @@ public:
     }
 
     /// @brief Move constructor
-    MyClass(const MyClass&& other) {
+    MyClass(const MyClass&& other) noexcept {
         tag_ = other.tag_;
         id_ = other.id_;
-        log_ids_ = std::move(other.log_ids_);
+        log_ids_ = other.log_ids_;
     }
+
+    MyClass& operator=(const MyClass&) = default;
+    MyClass& operator=(MyClass&&) = default;
 
     const std::vector<int>& get_log_ids() const { return log_ids_; }
 
@@ -48,7 +51,8 @@ public:
 
     int get_id() const { return id_; }
 
-    void set_tag(std::string tag) { tag_ = tag; }
+    void set_tag(const std::string& tag) { tag_ = tag; }
+    void set_tag(std::string&& tag) { tag_ = std::move(tag); }
 
     void set_id(int id) { id_ = id; }
 

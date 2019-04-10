@@ -1,19 +1,22 @@
 #include <iostream>
 
 template <typename T>
-bool pair_comparer(T a) {
+bool pair_comparer(T /*unused*/) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
   std::cerr << "[INFO] " << __PRETTY_FUNCTION__ << "\n";
   return false;
 }
 
 template <typename T>
 bool pair_comparer(T a, T b) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
   std::cerr << "[INFO] " << __PRETTY_FUNCTION__ << "\n";
   return a == b;
 }
 
 template <typename T, typename... Args>
 bool pair_comparer(T a, T b, Args... args) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
   std::cerr << "[INFO] " << __PRETTY_FUNCTION__ << "\n";
   return a == b && pair_comparer(args...);
 }

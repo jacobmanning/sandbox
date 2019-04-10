@@ -5,9 +5,15 @@
 
 class User {
 public:
-   User();
-   User(const std::string& name, const int id) : name_{name}, unique_id_{id} {}
-   User(const User& user) : name_{user.get_name()}, unique_id_{user.get_id()} {}
+   User() = default;
+   User(std::string name, const int id) :
+      name_{std::move(name)}, unique_id_{id} {}
+
+   ~User() = default;
+   User(const User&) = default;
+   User(User&&) = default;
+   User& operator=(const User&) = default;
+   User& operator=(User&&) = default;
 
    std::string get_name() const { return name_; }
 
@@ -34,8 +40,11 @@ public:
       }
    }
 
-   UserDatabase(const UserDatabase& udb) : users_{udb.users_} {}
-   UserDatabase(UserDatabase&& udb) : users_{std::move(udb.users_)} {}
+   ~UserDatabase() = default;
+   UserDatabase(const UserDatabase& udb) = default;
+   UserDatabase(UserDatabase&& udb) = default;
+   UserDatabase& operator=(const UserDatabase&) = default;
+   UserDatabase& operator=(UserDatabase&&) = default;
 
    bool add_user(const std::string& name) {
       if (!get_user(name)) {

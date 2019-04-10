@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 
-#include <util.h>
+#include "util.h"
 
 // All demo functions should follow this format
-using demo_function_t = void(*)(void);
+using demo_function_t = void(*)();
 
 void transform_demo() {
   // Config parameters
@@ -34,7 +34,7 @@ void transform_demo() {
   util::print_vector(results);
 }
 
-void dummy_demo() { return; }
+void dummy_demo() {}
 
 void announce_and_execute(const std::string& name, demo_function_t demo_fn) {
   // Common strings to print

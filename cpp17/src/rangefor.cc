@@ -3,11 +3,12 @@
  * @brief   Range-based for loop
  */
 
-#include <util.h>
+#include "util.h"
+
 #include <iostream>
 #include <vector>
 
-int main(int argc, const char** argv) {
+int main() {
     // Sample vector
     auto v = std::vector<int>{1, 2, 3, 4, 5};
 

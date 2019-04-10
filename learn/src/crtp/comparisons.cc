@@ -5,8 +5,8 @@ struct Comparisons {};
 
 template <typename Derived>
 bool operator==(const Comparisons<Derived>& o1, const Comparisons<Derived>& o2) {
-  const Derived& d1 = static_cast<const Derived&>(o1);
-  const Derived& d2 = static_cast<const Derived&>(o2);
+  const auto& d1 = static_cast<const Derived&>(o1);
+  const auto& d2 = static_cast<const Derived&>(o2);
 
   std::cerr << "[DEBUG] Comparsions<Derived>::operator==" << "\n";
 
@@ -22,7 +22,7 @@ bool operator!=(const Comparisons<Derived>& o1, const Comparisons<Derived>& o2) 
 class Person : public Comparisons<Person> {
 public:
   Person(std::string name, int age) :
-    name_{name}, age_{age} {}
+    name_{std::move(name)}, age_{age} {}
 
   friend bool operator<(const Person& p1, const Person& p2);
 

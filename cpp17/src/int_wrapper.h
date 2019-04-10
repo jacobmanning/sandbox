@@ -8,7 +8,7 @@ class IntWrapper {
 public:
     int value_;
     IntWrapper() : IntWrapper(0) {};
-    IntWrapper(int val) : value_{val} {};
+    explicit IntWrapper(int val) : value_{val} {};
 
     void print(std::ostream& os = std::cout) const {
         os << value_;

@@ -1,5 +1,5 @@
-#include <my_class.h>
-#include <logging.h>
+#include "my_class.h"
+#include "logging.h"
 
 #include <iostream>
 #include <memory>
@@ -9,12 +9,12 @@
 class DummyClass {
 public:
     DummyClass() : DummyClass{0} {}
-    DummyClass(int id) : shared_id_{id} {
+    explicit DummyClass(int id) : shared_id_{id} {
         my_class_ptr_ = std::make_shared<MyClass>("dummy", id);
     }
 
     DummyClass(int id, std::shared_ptr<MyClass> class_ptr)
-        : shared_id_{id}, my_class_ptr_{class_ptr} {}
+        : shared_id_{id}, my_class_ptr_{std::move(class_ptr)} {}
 
     void increment_shared_id() {
         shared_id_++;
@@ -57,7 +57,7 @@ int multiply_myclass_id(const std::shared_ptr<MyClass>& multiplicand,
 }
 
 std::shared_ptr<MyClass> copy_shared_ptr(std::shared_ptr<MyClass> original) {
-    return std::shared_ptr<MyClass>(original);
+    return std::shared_ptr<MyClass>(std::move(original));
 }
 
 int old_main() {

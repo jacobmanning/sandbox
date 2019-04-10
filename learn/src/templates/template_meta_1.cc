@@ -5,7 +5,7 @@ class DummyClass {
 public:
   DummyClass() = default;
 
-  void foo(DummyClass other) {}
+  void foo(DummyClass /*unused*/) {}
   // Also valid:
   // void foo(DummyClass&& other) {}
 };
@@ -16,8 +16,8 @@ public:
 
   // NOTE: The template checks will still work if we only
   //       have the function declaration and not the body
-  void foo(StupidClass other) {}
-  void foo(DummyClass other) {}
+  void foo(StupidClass /*unused*/) {}
+  void foo(DummyClass /*unused*/) {}
   // Also valid:
   // void foo(StupidClass&& other) {}
   // void foo(DummyClass&& other) {}

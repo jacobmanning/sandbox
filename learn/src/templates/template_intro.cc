@@ -22,7 +22,7 @@ public:
 };
 
 template <>
-bool equals<DummyClass>(const DummyClass& lhs, const DummyClass& rhs) {
+bool equals<DummyClass>(const DummyClass& /*lhs*/, const DummyClass& /*rhs*/) {
   std::cerr << "Tried to call equals() on DummyClass" << std::endl;
   return false;
 }

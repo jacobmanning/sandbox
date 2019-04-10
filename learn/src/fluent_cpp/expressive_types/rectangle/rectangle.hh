@@ -36,7 +36,7 @@ using Height = util::v1::named_type<double, HeightParameter>;
 class Rectangle
 {
 public:
-  Rectangle(Width, Height);
+  Rectangle(Width /*width*/, Height /*height*/);
 
   void set_height(double height);
   void set_width(double width);
@@ -63,7 +63,7 @@ using Height = util::v1::named_type<units::Meter, HeightParameter>;
 class Rectangle
 {
 public:
-  Rectangle(Width, Height);
+  Rectangle(Width /*width*/, Height /*height*/);
 
   void set_height(double height);
   void set_width(double width);
