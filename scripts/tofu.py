@@ -81,9 +81,10 @@ def analyze(target, arch):
 
     tidy_args = ['clang-tidy', '-p', '{}'.format(build_dir_path),
             # '-checks=*', '-header-filter=.*']
-            '-checks=bugprone-*,cppcoreguidelines-*,clang-analyzer-*,google-*,hicpp-*,misc-*,modernize-*,performance-*,readability-*', '-header-filter=.*']
+            '-checks=bugprone-*,cppcoreguidelines-*,clang-analyzer-*,google-*,hicpp-*,misc-*,modernize-*,performance-*,readability-*', '-header-filter=.*', '-quiet']
 
     for f in glob.glob(os.path.join(target, '**/*.cc'), recursive=True):
+        LOG_INFO('Analzying: {}'.format(f))
         these_tidy_args = tidy_args + [f]
         result = subprocess.run(these_tidy_args, stdout=sys.stdout, stderr=sys.stderr)
 
