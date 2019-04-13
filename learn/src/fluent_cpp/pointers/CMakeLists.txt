@@ -1,3 +1,5 @@
+add_subdirectory(pimpl)
+
 add_executable(knowing_your_pointers
                knowing_your_pointers.cc)
 
