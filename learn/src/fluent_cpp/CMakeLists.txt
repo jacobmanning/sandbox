@@ -1,4 +1,5 @@
 add_subdirectory(expressive_types)
+add_subdirectory(pointers)
 
 add_executable(functors_vs_lambdas
                helper_classes.cc
