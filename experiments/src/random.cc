@@ -34,13 +34,12 @@ std::vector<T> vector_intersection(const std::vector<T>& v1,
                                    const std::vector<T>& v2) {
   auto common = std::vector<T>();
 
-  for (const auto& el1 : v1) {
-    auto it = std::find_if(std::begin(v2), std::end(v2),
-                           [&el1](const auto& el2) { return el1 == el2; });
-    if (it != std::end(v2)) {
-      common.emplace_back(el1);
-    }
-  }
+  std::copy_if(std::begin(v1), std::end(v1), std::back_inserter(common),
+               [&v2] (const auto& el1) {
+                 auto it = std::find_if(std::begin(v2), std::end(v2),
+                     [&el1] (const auto& el2) { return el1 == el2; });
+                 return it != std::end(v2);
+               });
 
   return common;
 }
