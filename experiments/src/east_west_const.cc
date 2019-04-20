@@ -1,5 +1,3 @@
-#include <iostream>
-
 /// In my opinion, west const is clearer
 void west()
 {

@@ -1,4 +1,3 @@
-#include <cassert>
 #include <iostream>
 
 struct MyMatrix {
@@ -109,16 +108,16 @@ int main() {
     auto a = make_matrix(5, 5);
 
     set_element(a, 0, 0, 3.14);
-    std::cout << "a.elements[0][0] = " << get_element(a, 0, 0) << std::endl;
+    std::cout << "a.elements[0][0] = " << get_element(a, 0, 0) << '\n';
 
     set_reserved(a, 1, 17);
-    std::cout << "a.reserved[1] = " << get_reserved(a, 1) << std::endl;
+    std::cout << "a.reserved[1] = " << get_reserved(a, 1) << '\n';
 
     set_dummy_copy(a, 4);
-    std::cout << "a._dummy = " << get_dummy(a) << std::endl;
+    std::cout << "a._dummy = " << get_dummy(a) << '\n';
 
     set_dummy_ref(a, 4);
-    std::cout << "a._dummy = " << get_dummy(a) << std::endl;
+    std::cout << "a._dummy = " << get_dummy(a) << '\n';
 
     free_matrix(a);
 }

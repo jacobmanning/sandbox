@@ -41,12 +41,12 @@ int main() {
   int my_int = 4;
 
   if (maybe_increment(mc)) {
-    std::cout << "Incremented mc" << std::endl;
-    std::cout << "mc.get_id() = " << mc.get_id() << std::endl;
+    std::cout << "Incremented mc" << '\n';
+    std::cout << "mc.get_id() = " << mc.get_id() << '\n';
   }
 
   if (maybe_increment(my_int)) {
-    std::cout << "Incremented my_int" << std::endl;
-    std::cout << "my_int = " << my_int << std::endl;
+    std::cout << "Incremented my_int" << '\n';
+    std::cout << "my_int = " << my_int << '\n';
   }
 }
