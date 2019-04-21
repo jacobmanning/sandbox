@@ -1,3 +1,5 @@
+add_subdirectory(templates)
+
 add_executable(struct_by_value
                struct_by_value.cc)
 
