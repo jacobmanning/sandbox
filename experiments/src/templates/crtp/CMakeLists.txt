@@ -20,12 +20,15 @@ add_executable(omp_matmul
                omp.cc)
 
 find_package(OpenMP)
+
 if(OpenMP_CXX_FOUND)
+    message(STATUS "Found OpenMP")
     target_link_libraries(omp_matmul PUBLIC
                           matrix
                           matmul
                           OpenMP::OpenMP_CXX)
 else()
+    message(STATUS "Could NOT find OpenMP")
     target_link_libraries(omp_matmul PUBLIC
                           matrix
                           matmul)

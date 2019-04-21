@@ -1,24 +1,24 @@
 #pragma once
 
 #include <matrix.hh>
+#include <matrix_multiply.hh>
 
 namespace util
 {
 
-class matrix_multiply_omp_impl : public matrix_multiply_impl<matrix_multiply_omp_impl>
+struct matrix_multiply_omp_impl : matrix_multiply_impl<matrix_multiply_omp_impl>
 {
-public:
-  template <typename T, std::size_t N, std::size_t M, std::size_t P>
-  matrix<T, N, P> multiply(const matrix<T, N, M>& a, const matrix<T, M, P>& b)
+  template <typename T, std::size_t R1, std::size_t S, std::size_t C2>
+  matrix<T, R1, C2> multiply(const matrix<T, R1, S>& a, const matrix<T, S, C2>& b) const
   {
-    auto result = matrix<T, N, P>(0);
+    auto result = matrix<T, R1, C2>{0};
 
     #pragma omp parallel for collapse(3)
-    for (int i = 0; i < N; ++i)
+    for (auto i = int{0}; i < R1; ++i)
     {
-      for (int j = 0; j < M; ++j)
+      for (auto j = int{0}; j < S; ++j)
       {
-        for (int k = 0; k < P; ++k)
+        for (auto k = int{0}; k < C2; ++k)
         {
           result.at(i, j) += a.at(i, k) * b.at(k, j);
         }

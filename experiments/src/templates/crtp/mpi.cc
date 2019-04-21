@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <matrix.hh>
-#include <matrix_multiply.hh>
 #include <matrix_multiply_mpi.hh>
 
 int main()
@@ -18,7 +17,7 @@ int main()
   m2.print();
 
   auto mpi_multiplier = util::matrix_multiply_mpi{};
-  auto result = mpi_multiplier.multiply(m1, m2);
+  auto result = mpi_multiplier(m1, m2);
   std::cout << "\nMPI Result:" << '\n';
   result.print();
 }

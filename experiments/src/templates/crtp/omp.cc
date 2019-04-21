@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <matrix.hh>
-#include <matrix_multiply.hh>
 #include <matrix_multiply_omp.hh>
 
 int main()
@@ -18,7 +17,7 @@ int main()
   m2.print();
 
   auto omp_multiplier = util::matrix_multiply_omp{};
-  auto result = omp_multiplier.multiply(m1, m2);
+  auto result = omp_multiplier(m1, m2);
   std::cout << "\nOpenMP Result:" << '\n';
   result.print();
 }

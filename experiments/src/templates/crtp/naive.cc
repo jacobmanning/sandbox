@@ -17,7 +17,7 @@ int main()
   m2.print();
 
   auto naive_multiplier = util::matrix_multiply{};
-  auto result = naive_multiplier.multiply(m1, m2);
+  auto result = naive_multiplier(m1, m2);
   std::cout << "\nResult:" << '\n';
   result.print();
 }

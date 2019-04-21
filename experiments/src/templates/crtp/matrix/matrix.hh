@@ -1,7 +1,7 @@
 #pragma once
 
-#include <array>
 #include <algorithm>
+#include <array>
 #include <iostream>
 #include <random>
 #include <type_traits>
@@ -10,8 +10,8 @@ namespace util
 {
 
 template <typename T,
-          std::size_t N,
-          std::size_t M,
+          std::size_t R,
+          std::size_t C,
           typename = std::enable_if_t<std::is_arithmetic_v<T>>>
 class matrix
 {
@@ -35,50 +35,39 @@ public:
     std::fill(std::begin(data_), std::end(data_), fill_value);
   }
 
-  template <typename T_ = T,
-            typename = std::enable_if_t<std::is_same_v<int, T_>>>
-  void fill_random()
+  template <typename = std::enable_if_t<std::is_same_v<int, T>>>
+  void fill_random(const int low = 1, const int high = 10)
   {
     std::random_device dev{};
     auto rng = std::mt19937{dev()};
-    auto dist = std::uniform_int_distribution<std::mt19937::result_type>(1, 10);
+    auto dist = std::uniform_int_distribution<std::mt19937::result_type>(low, high);
 
-    for (int i = 0; i < num_rows_; ++i)
-    {
-      for (int j = 0; j < num_cols_; ++j)
-      {
-        at(i, j) = dist(rng);
-      }
-    }
+    std::for_each(std::begin(data_), std::end(data_),
+                  [&dist, &rng] (auto& elem) { elem = dist(rng); });
   }
 
   T& at(const std::size_t row, const std::size_t col)
   {
-    return data_.at(num_cols_ * row + col);
+    return data_.at(C * row + col);
   }
 
   const T& at(const std::size_t row, const std::size_t col) const
   {
-    return data_.at(num_cols_ * row + col);
+    return data_.at(C * row + col);
   }
 
-  void print(std::ostream& os = std::cout)
+  void print(std::ostream& os = std::cout) const
   {
-    for (int i = 0; i < N; ++i)
-    {
-      for (int j = 0; j < M; ++j)
-      {
-        os << at(i, j) << ' ';
-      }
-
-      os << '\n';
-    }
+    auto i = int{0};
+    std::for_each(std::begin(data_), std::end(data_), [&i, &os] (auto& elem) {
+      os << elem << ' ';
+      // Print newline after C elements
+      if (++i % C == 0) { os << '\n'; }
+    });
   }
 
 private:
-  std::size_t num_rows_ = N;
-  std::size_t num_cols_ = M;
-  std::array<T, N * M> data_;
+  std::array<T, R * C> data_;
 };
 
 }  // namespace util
