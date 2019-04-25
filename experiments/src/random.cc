@@ -21,9 +21,12 @@ namespace util {
 template <class T>
 void print_vector(const std::vector<T>& vec) {
   std::for_each(std::begin(vec), std::end(vec),
-                [](const T& element) { std::cout << element << " "; });
+                [] (const T& element) { std::cout << element << " "; });
   std::cout << '\n';
 }
+
+namespace v1
+{
 
 /// @brief Finds common elements between two vectors
 /// @param v1 The first vector
@@ -34,6 +37,7 @@ std::vector<T> vector_intersection(const std::vector<T>& v1,
                                    const std::vector<T>& v2) {
   auto common = std::vector<T>();
 
+  // No sorting needed ()
   std::copy_if(std::begin(v1), std::end(v1), std::back_inserter(common),
                [&v2] (const auto& el1) {
                  auto it = std::find_if(std::begin(v2), std::end(v2),
@@ -43,6 +47,36 @@ std::vector<T> vector_intersection(const std::vector<T>& v1,
 
   return common;
 }
+
+}  // namespace v1
+
+namespace v2
+{
+
+// Pro: uses std::set_intersection algorithm
+// Con: requires either copying arguments to sort them or removing `const`
+//      in main and passing by non-const ref (side effects)
+template <class T>
+std::vector<T> vector_intersection(std::vector<T> v1,
+                                   std::vector<T> v2)
+{
+  auto common = std::vector<T>{};
+
+  // Sort v1
+  std::sort(std::begin(v1), std::end(v1));
+
+  // Sort v2
+  std::sort(std::begin(v2), std::end(v2));
+
+  // std::set_intersection expects sorted inputs
+  std::set_intersection(std::begin(v1), std::end(v1),
+                        std::begin(v2), std::end(v2),
+                        std::back_inserter(common));
+
+  return common;
+}
+
+}  // namespace v2
 
 }  // namespace util
 
@@ -67,7 +101,7 @@ int main() {
   const auto your_interests =
       std::vector<std::string>{"six", "five", "four", "three"};
   const auto common_interests =
-      util::vector_intersection(my_interests, your_interests);
+      util::v1::vector_intersection(my_interests, your_interests);
 
   std::cout << "\nMy interests:" << '\n';
   util::print_vector(my_interests);
