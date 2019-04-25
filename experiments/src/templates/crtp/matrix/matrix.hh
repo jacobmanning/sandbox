@@ -38,12 +38,12 @@ public:
   template <typename = std::enable_if_t<std::is_same_v<int, T>>>
   void fill_random(const int low = 1, const int high = 10)
   {
-    std::random_device dev{};
+    auto dev = std::random_device{};
     auto rng = std::mt19937{dev()};
     auto dist = std::uniform_int_distribution<std::mt19937::result_type>(low, high);
+    auto random_generator = [&rng, &dist] () { return dist(rng); };
 
-    std::for_each(std::begin(data_), std::end(data_),
-                  [&dist, &rng] (auto& elem) { elem = dist(rng); });
+    std::generate(std::begin(data_), std::end(data_), random_generator);
   }
 
   T& at(const std::size_t row, const std::size_t col)
@@ -59,6 +59,7 @@ public:
   void print(std::ostream& os = std::cout) const
   {
     auto i = int{0};
+
     std::for_each(std::begin(data_), std::end(data_), [&i, &os] (auto& elem) {
       os << elem << ' ';
       // Print newline after C elements
