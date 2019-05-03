@@ -1,8 +1,3 @@
-/**
- * @author  Jacob Manning
- * @brief   std::tuple functions
- */
-
 #include "util.h"
 
 #include <iostream>
@@ -23,7 +18,7 @@ int main() {
     age = 27;
 
     // Print our copies to show new values
-    std::cout << "Name: " << name << ". Age: " << age << std::endl;
+    std::cout << "Name: " << name << ". Age: " << age << '\n';
 
     // We only changed our copy, the tuple values haven't changed
     util::print_tuple(my_tuple);

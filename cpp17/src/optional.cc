@@ -15,7 +15,7 @@ public:
    User& operator=(const User&) = default;
    User& operator=(User&&) = default;
 
-   std::string get_name() const { return name_; }
+   const std::string& get_name() const { return name_; }
 
    int get_id() const { return unique_id_; }
 
@@ -47,11 +47,12 @@ public:
    UserDatabase& operator=(UserDatabase&&) = default;
 
    bool add_user(const std::string& name) {
-      if (!get_user(name)) {
-         users_.emplace_back(name, users_.size());
-         return true;
+      if (get_user(name)) {
+         return false;
       }
-      return false;
+
+      users_.emplace_back(name, users_.size());
+      return true;
    }
 
    std::optional<User> get_user(const std::string& name) const {
@@ -60,6 +61,7 @@ public:
             return user;
          }
       }
+
       return {};
    }
 

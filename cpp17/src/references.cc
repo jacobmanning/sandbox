@@ -1,57 +1,41 @@
 #include "my_class.h"
+#include "util.h"
+
+#include <algorithm>
 #include <iostream>
 
-// void use_my_class(const MyClass& my_obj) {
 // NOLINTNEXTLINE(google-runtime-references)
-void use_my_class(MyClass& my_obj) {
-    // Get const reference to log_ids_ vector
-    // const auto& obj_vec = my_obj.get_log_ids();
-    auto& obj_vec_m = my_obj.get_log_ids_mutable();
+void use_my_class(MyClass& obj) {
+    auto& ids_mut = obj.get_log_ids_mutable();
 
-    for (const auto& el : obj_vec_m) {
-        std::cout << el << " ";
-    }
+    util::print_vector(ids_mut);
 
-    std::cout << "\n";
+    std::for_each(std::begin(ids_mut), std::end(ids_mut),
+                   [] (auto& el) { el *= 2; });
 
-    for (auto& el : obj_vec_m) {
-        el *= 2;
-        std::cout << el << " ";
-    }
-
-    std::cout << "\n";
+    util::print_vector(ids_mut);
 }
 
 int main() {
-    auto my_obj_m = MyClass{"my_name", 1337};
-    // const auto my_obj = MyClass{"my_name", 1337};
+    auto obj = MyClass{"my_name", 1337};
 
-    my_obj_m.append_log_id(3);
-    my_obj_m.append_log_id(2);
-    my_obj_m.append_log_id(1);
+    obj.append_log_id(3);
+    obj.append_log_id(2);
+    obj.append_log_id(1);
 
-    use_my_class(my_obj_m);
+    use_my_class(obj);
 
-    for (const auto& el : my_obj_m.get_log_ids()) {
-        std::cout << el << " ";
-    }
+    util::print_vector(obj.get_log_ids());
 
-    std::cout << "\n";
+    obj.get_log_id_at_mutable(0) *= 3;
+    std::cout << "my_obj.get_log_id_at(0) = " << obj.get_log_id_at(0) << '\n';
 
-    auto& x = my_obj_m.get_log_id_at_mutable(0);
-    x *= 3;
-    std::cout << "x = " << x << '\n';
-    std::cout << "my_obj.get_lod_id_at(0) = " << my_obj_m.get_log_id_at(0)
-              << std::endl;
+    // Copy constructor
+    auto new_obj = obj;
 
-    // auto my_new_obj = std::move(my_obj_m);
-    auto my_new_obj = my_obj_m;
+    obj.append_log_id(4);
+    std::cout << "y = " << obj.get_log_id_at(3) << '\n';
 
-    my_obj_m.append_log_id(4);
-    auto& y = my_obj_m.get_log_id_at_mutable(3);
-    std::cout << "y = " << y << '\n';
-
-    my_new_obj.append_log_id(6);
-    auto& z = my_new_obj.get_log_id_at_mutable(3);
-    std::cout << "z = " << z << '\n';
+    new_obj.append_log_id(6);
+    std::cout << "z = " << new_obj.get_log_id_at(3) << '\n';
 }

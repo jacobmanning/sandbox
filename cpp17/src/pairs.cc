@@ -1,8 +1,3 @@
-/**
- * @author  Jacob Manning
- * @brief   std::pair functions
- */
-
 #include "util.h"
 
 #include <iostream>

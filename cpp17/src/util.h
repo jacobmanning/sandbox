@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _UTIL_H
-#define _UTIL_H
 
 #include <algorithm>
 #include <iostream>
@@ -29,9 +27,7 @@ template <class T, class U, class V>
 void print_tuple(const std::tuple<T, U, V>& t) {
     std::cout << "First: " << std::get<0>(t) << ". "
               << "Second: " << std::get<1>(t) << ". "
-              << "Third: " << std::get<2>(t) << std::endl;
+              << "Third: " << std::get<2>(t) << '\n';
 }
 
 }  // namespace util
-
-#endif  // _UTIL_H

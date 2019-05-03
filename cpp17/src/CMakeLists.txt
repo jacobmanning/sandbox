@@ -20,9 +20,6 @@ add_executable(references
 add_executable(shared_ptrs
                shared_ptrs.cc)
 
-add_executable(smart_ptrs
-               smart_ptrs.cc)
-
 add_executable(stl
                stl.cc)
 
@@ -39,7 +36,6 @@ install(TARGETS futures
                 rangefor
                 references
                 shared_ptrs
-                smart_ptrs
                 stl
                 tuples
                 vectors

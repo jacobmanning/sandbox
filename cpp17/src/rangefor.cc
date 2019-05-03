@@ -1,8 +1,3 @@
-/**
- * @author  Jacob Manning
- * @brief   Range-based for loop
- */
-
 #include "util.h"
 
 #include <iostream>

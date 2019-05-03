@@ -1,12 +1,11 @@
 #pragma once
-#ifndef INT_WRAPPER_H_
-#define INT_WRAPPER_H_
 
 #include <iostream>
 
 class IntWrapper {
 public:
     int value_;
+
     IntWrapper() : IntWrapper(0) {};
     explicit IntWrapper(int val) : value_{val} {};
 
@@ -27,5 +26,3 @@ public:
         x.value_ *= y;
     }
 };
-
-#endif // INT_WRAPPER_H_

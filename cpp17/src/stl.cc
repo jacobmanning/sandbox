@@ -13,8 +13,7 @@ void transform_demo() {
   const int fill_value = 17;
 
   // Create original vector and fill w/ sentinel
-  auto vec = std::vector<int>(size);
-  std::fill(std::begin(vec), std::end(vec), fill_value);
+  auto vec = std::vector<int>(size, fill_value);
 
   // Create container for result of `std::transform`
   auto results = std::vector<int>();
@@ -25,12 +24,12 @@ void transform_demo() {
 
   // Add each element to itself and append to results
   std::transform(std::begin(vec), std::end(vec), std::back_inserter(results),
-                 [](const auto x) { return x + x; });
+                 [] (const auto x) { return x + x; });
 
   // Print results
-  std::cout << "Original vector:" << std::endl;
+  std::cout << "Original vector:" << '\n';
   util::print_vector(vec);
-  std::cout << "Result vector:" << std::endl;
+  std::cout << "Result vector:" << '\n';
   util::print_vector(results);
 }
 
@@ -44,11 +43,11 @@ void announce_and_execute(const std::string& name, demo_function_t demo_fn) {
   // Print name of demo w/ separators
   std::cout << sep;
   std::cout << name << suffix;
-  std::cout << sep << std::endl;
+  std::cout << sep << '\n';
   // Call demo function
   demo_fn();
   // Print separator
-  std::cout << sep << std::endl;
+  std::cout << sep << '\n';
 }
 
 int main() {
@@ -61,5 +60,5 @@ int main() {
   // Apply the `announce_and_execute` function to all [name, function] pairs
   // in the list of demos
   std::for_each(std::begin(demo_list), std::end(demo_list),
-                [](auto& p) { std::apply(announce_and_execute, p); });
+                [] (auto& p) { std::apply(announce_and_execute, p); });
 }

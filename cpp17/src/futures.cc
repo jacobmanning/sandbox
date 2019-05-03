@@ -1,8 +1,3 @@
-/**
- * @author  Jacob Manning
- * @brief   Test of C++11 std::future
- */
-
 #include <future>
 #include <iostream>
 
