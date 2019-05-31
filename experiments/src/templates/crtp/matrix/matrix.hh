@@ -23,12 +23,11 @@ public:
     fill(fill_value);
   }
 
-  ~matrix() = default;
-
-  matrix(const matrix&) = default;
-  matrix(matrix&&) noexcept= default;
-  matrix& operator=(const matrix&) = default;
-  matrix& operator=(matrix&&) noexcept= default;
+  // ~matrix() = default;
+  // matrix(const matrix&) = default;
+  // matrix(matrix&&) noexcept = default;
+  // matrix& operator=(const matrix&) = default;
+  // matrix& operator=(matrix&&) noexcept = default;
 
   void fill(const T& fill_value)
   {
