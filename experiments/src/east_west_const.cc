@@ -38,8 +38,8 @@ void west()
 
 void east()
 {
-  const int c_data = 4;
-  const int new_c_data = 5;
+  int const c_data = 4;
+  int const new_c_data = 5;
   int data = 0;
   int new_data = 1;
 
