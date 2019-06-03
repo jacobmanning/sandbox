@@ -4,9 +4,6 @@
 
 #include "util.h"
 
-// All demo functions should follow this format
-using demo_function_t = void(*)();
-
 void transform_demo() {
   // Config parameters
   const int size = 10;
@@ -34,6 +31,9 @@ void transform_demo() {
 }
 
 void dummy_demo() {}
+
+// All demo functions should follow this format
+using demo_function_t = decltype(&transform_demo);
 
 void announce_and_execute(const std::string& name, demo_function_t demo_fn) {
   // Common strings to print

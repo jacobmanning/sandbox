@@ -5,7 +5,7 @@
 CXX = g++
 
 # Compiler and linker flags
-CC_FLAGS := --std=c++11 -Wall
+CC_FLAGS := --std=c++17 -Wall
 LD_FLAGS := -pthread
 
 # Directories

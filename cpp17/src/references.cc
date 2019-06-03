@@ -10,8 +10,8 @@ void use_my_class(MyClass& obj) {
 
     util::print_vector(ids_mut);
 
-    std::for_each(std::begin(ids_mut), std::end(ids_mut),
-                   [] (auto& el) { el *= 2; });
+    std::transform(std::begin(ids_mut), std::end(ids_mut), std::begin(ids_mut),
+                   [] (auto& element) { return element * 2; });
 
     util::print_vector(ids_mut);
 }

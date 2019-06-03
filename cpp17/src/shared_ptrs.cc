@@ -14,11 +14,11 @@ public:
 
     explicit MyClassWrapper(std::shared_ptr<MyClass> class_ptr) : ptr_{std::move(class_ptr)} {}
 
-    ~MyClassWrapper() = default;
-    MyClassWrapper(const MyClassWrapper& other) = default;
-    MyClassWrapper(MyClassWrapper&& other) = default;
-    MyClassWrapper& operator=(const MyClassWrapper&) = default;
-    MyClassWrapper& operator=(MyClassWrapper&&) = default;
+    // ~MyClassWrapper() = default;
+    // MyClassWrapper(const MyClassWrapper& other) = default;
+    // MyClassWrapper(MyClassWrapper&& other) = default;
+    // MyClassWrapper& operator=(const MyClassWrapper&) = default;
+    // MyClassWrapper& operator=(MyClassWrapper&&) = default;
 
     void increment_shared_id() {
         ptr_->increment_id();

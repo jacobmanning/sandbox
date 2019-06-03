@@ -10,7 +10,7 @@ class MyClass {
 public:
     MyClass() : MyClass("default") {};
 
-    explicit MyClass(std::string tag) : MyClass(std::forward<std::string>(tag), 0) {};
+    explicit MyClass(std::string tag) : MyClass(tag, 0) {};
 
     MyClass(std::string tag, int id) : log_ids_{}, tag_{std::move(tag)}, id_{id} {
         std::cout << "Constructing MyClass\n";

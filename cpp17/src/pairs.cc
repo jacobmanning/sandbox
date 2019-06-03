@@ -7,19 +7,19 @@
 
 int main() {
     // Make a basic pair
-    auto p1 = std::make_pair(10, 10);
+    auto p = std::make_pair(10, 10);
     // Print the values
-    std::cout << "First: " << p1.first << ", "
-              << "Second: " << p1.second << std::endl;
+    std::cout << "First: " << p.first << ", "
+              << "Second: " << p.second << '\n';
 
     // Vector of some strings
     auto languages = std::vector<std::string>{"C++", "C", "Python", "Java"};
     // Pair of string and vector
-    auto person = std::make_pair("Languages", languages);
+    auto my_pair = std::make_pair("Languages", languages);
 
-    std::cout << "First: " << person.first << ", ";
+    std::cout << "First: " << my_pair.first << ", ";
     std::cout << "Second: ";
-    util::print_vector(person.second);
+    util::print_vector(my_pair.second);
 
     return 0;
 }

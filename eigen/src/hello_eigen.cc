@@ -3,5 +3,5 @@
 #include <Eigen/Core>
 
 int main() {
-    std::cout << "Hello, Eigen!" << std::endl;
+    std::cout << "Hello, Eigen!" << '\n';
 }

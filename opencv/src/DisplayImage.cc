@@ -3,14 +3,14 @@
 
 int main(int argc, const char** argv) {
     if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " </path/to/image>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " </path/to/image>" << '\n';
         return 1;
     }
 
     auto image = cv::imread(argv[1], 1);
 
     if (!image.data) {
-        std::cerr << "No image data!" << std::endl;
+        std::cerr << "No image data!" << '\n';
         return 1;
     }
 

@@ -9,11 +9,11 @@ public:
    User(std::string name, const int id) :
       name_{std::move(name)}, unique_id_{id} {}
 
-   ~User() = default;
-   User(const User&) = default;
-   User(User&&) = default;
-   User& operator=(const User&) = default;
-   User& operator=(User&&) = default;
+   // ~User() = default;
+   // User(const User&) = default;
+   // User(User&&) = default;
+   // User& operator=(const User&) = default;
+   // User& operator=(User&&) = default;
 
    const std::string& get_name() const { return name_; }
 
@@ -40,11 +40,11 @@ public:
       }
    }
 
-   ~UserDatabase() = default;
-   UserDatabase(const UserDatabase& udb) = default;
-   UserDatabase(UserDatabase&& udb) = default;
-   UserDatabase& operator=(const UserDatabase&) = default;
-   UserDatabase& operator=(UserDatabase&&) = default;
+   // ~UserDatabase() = default;
+   // UserDatabase(const UserDatabase& udb) = default;
+   // UserDatabase(UserDatabase&& udb) = default;
+   // UserDatabase& operator=(const UserDatabase&) = default;
+   // UserDatabase& operator=(UserDatabase&&) = default;
 
    bool add_user(const std::string& name) {
       if (get_user(name)) {
