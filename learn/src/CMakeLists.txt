@@ -1,6 +1,6 @@
 add_subdirectory(stl_compliant)
 add_subdirectory(templates)
-# add_subdirectory(template_meta)
+add_subdirectory(template_meta)
 add_subdirectory(variadic_templates)
 add_subdirectory(crtp)
 add_subdirectory(fluent_cpp)
