@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <iterator>
 #include <type_traits>
 
 namespace util {
@@ -40,6 +41,17 @@ auto enumerate(InputIt begin, InputIt end, BinaryOperandFunction loop_body) {
   };
 
   std::for_each(begin, end, runnable_loop_body);
+}
+
+template <
+    typename Range, typename BinaryOperandFunction,
+    typename It = decltype(std::begin(std::declval<Range>())),
+    typename LoopElementType = typename std::iterator_traits<It>::value_type,
+    typename = RequireInputIterator<It>,
+    typename = RequireInvocableBinaryOperandFunction<BinaryOperandFunction, int,
+                                                     LoopElementType, void>>
+auto enumerate(Range range, BinaryOperandFunction loop_body) {
+  enumerate(std::begin(range), std::end(range), loop_body);
 }
 
 }  // namespace util
