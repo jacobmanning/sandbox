@@ -45,9 +45,9 @@ void ClassMethodLoop(Parent* parent, Args&&... args)
 class HouseCleaner
 {
 public:
-  void clean_all(std::string&& tool)
+  void clean_all(std::string_view tool)
   {
-    ClassMethodLoop<4, CleanHouseWrapper>(this, std::forward<std::string>(tool));
+    ClassMethodLoop<4, CleanHouseWrapper>(this, std::forward<std::string_view>(tool));
   }
 
 private:
@@ -56,14 +56,14 @@ private:
   template <int N, typename... Args>
   struct CleanHouseWrapper
   {
-    void operator()(HouseCleaner* parent, std::string&& tool) const
+    void operator()(HouseCleaner* parent, std::string_view tool) const
     {
-      parent->clean_house<N>(std::forward<std::string>(tool));
+      parent->clean_house<N>(std::forward<std::string_view>(tool));
     }
   };
 
   template <int N>
-  void clean_house(const std::string& tool) const
+  void clean_house(std::string_view tool) const
   {
     std::cout << message_ << N << " with " << tool << "\n";
   }
@@ -72,5 +72,18 @@ private:
 int main()
 {
   auto cleaner = HouseCleaner();
+
+  // Bind rvalue ref to std::string_view
   cleaner.clean_all("broom");
+
+  // Bind rvalue ref to std::string_view
+  cleaner.clean_all(std::string{"vaccuum"});
+
+  // Bind const lvalue to std::string_view
+  const auto dustpan = std::string{"dustpan"};
+  cleaner.clean_all(dustpan);
+
+  // Bind non-const lvalue to std::string_view
+  auto my_tool = std::string{"running out of tools lol"};
+  cleaner.clean_all(my_tool);
 }
