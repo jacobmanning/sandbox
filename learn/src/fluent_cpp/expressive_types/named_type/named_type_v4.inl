@@ -7,9 +7,7 @@ named_type_impl<T, Tag, Converter, Skills...>::named_type_impl(const T& value) :
 template <typename T, typename Tag,
           typename Converter,
           template <typename> class... Skills>
-template <typename T_,
-          typename std::enable_if_t<!std::is_reference<T_>{},
-          std::nullptr_t>>
+template <typename T_, typename>
 named_type_impl<T, Tag, Converter, Skills...>::named_type_impl(T&& value) :
   value_{std::move(value)} {}
 

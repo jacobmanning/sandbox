@@ -34,9 +34,8 @@ private:
   std::reference_wrapper<T> t_;
 };
 
-#include <named_type_v1.inl>
+#include "named_type_v1.inl"
 
-// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v1
 
 namespace util::v2
@@ -49,8 +48,7 @@ public:
   explicit named_type(const T& value);
 
   template <typename T_ = T,
-            typename std::enable_if_t<!std::is_reference<T_>{},
-            std::nullptr_t> = nullptr>
+            typename = std::enable_if_t<!std::is_reference_v<T_>>>
   explicit named_type(T&& value);
 
   T& get();
@@ -60,9 +58,8 @@ private:
   T value_;
 };
 
-#include <named_type_v2.inl>
+#include "named_type_v2.inl"
 
-// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v2
 
 namespace util::v3
@@ -77,25 +74,21 @@ public:
   explicit named_type(const T& value);
 
   template <typename T_ = T,
-            typename std::enable_if_t<!std::is_reference<T_>{},
-            std::nullptr_t> = nullptr>
+            typename = std::enable_if_t<!std::is_reference_v<T_>>>
   explicit named_type(T&& value);
 
   T& get();
   const T& get() const;
 
-  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
-  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
 
 private:
   T value_;
 };
 
-#include <named_type_v3.inl>
+#include "named_type_v3.inl"
 
-// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v3
 
 namespace util::v4
@@ -139,22 +132,18 @@ public:
   explicit named_type_impl(const T& value);
 
   template <typename T_ = T,
-            typename std::enable_if_t<!std::is_reference<T_>{},
-            std::nullptr_t> = nullptr>
+            typename = std::enable_if_t<!std::is_reference_v<T_>>>
   explicit named_type_impl(T&& value);
 
   T& get();
   const T& get() const;
 
-  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator T&();
-  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
 
   using UnderlyingType = T;
 
   template <typename Converter2>
-  // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator named_type_impl<T, Tag, Converter2, Skills...>() const;
 
   template <T(*f)(T), T(*g)(T)>
@@ -180,7 +169,7 @@ private:
   T value_;
 };
 
-#include <named_type_v4.inl>
+#include "named_type_v4.inl"
 
 template <typename T, typename Tag,
           template <typename> class... Skills>
@@ -193,7 +182,6 @@ using multiple_of = typename StrongType::template GetConvertible<
 template <typename StrongType, typename Converter>
 using convertible_to = typename StrongType::template GetConvertible<Converter>;
 
-// NOLINTNEXTLINE(google-readability-namespace-comments)
 }  // namespace util::v4
 
 namespace util

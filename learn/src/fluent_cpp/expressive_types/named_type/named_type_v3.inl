@@ -5,9 +5,7 @@ named_type<T, Parameter, Skills...>::named_type(const T& value) :
 
 template <typename T, typename Parameter,
           template <typename> class... Skills>
-template <typename T_,
-          typename std::enable_if_t<!std::is_reference<T_>{},
-          std::nullptr_t>>
+template <typename T_, typename>
 named_type<T, Parameter, Skills...>::named_type(T&& value) :
   value_{std::move(value)} {}
 
