@@ -1,17 +1,24 @@
 #include <type_traits>
 #include <vector>
 
-template <typename>
-struct type {};
+namespace util
+{
+
+template <typename Arg>
+struct type_wrapper
+{
+};
+
+}  // namespace util
 
 template <typename T>
-T create(type<T> /*unused*/)
+auto create(util::type_wrapper<T>)
 {
   return T{};
 }
 
 template <typename T>
-std::vector<T> create(type<std::vector<T>> /*unused*/)
+auto create(util::type_wrapper<std::vector<T>>)
 {
   auto v = std::vector<T>{};
   v.reserve(1000);
@@ -19,9 +26,9 @@ std::vector<T> create(type<std::vector<T>> /*unused*/)
 }
 
 template <typename T>
-T create()
+auto create()
 {
-  return create(type<T>{});
+  return create(util::type_wrapper<T>{});
 }
 
 int main()
