@@ -15,10 +15,10 @@ void NoCustomSwapClass::print(std::ostream& out) const
   out << "[NoCustomSwapClass] a_ = " << a_ << ", b_" << b_;
 }
 
-}  // namespace util
-
 std::ostream& operator<<(std::ostream& os, const util::NoCustomSwapClass& mc)
 {
   mc.print(os);
   return os;
 }
+
+}  // namespace util

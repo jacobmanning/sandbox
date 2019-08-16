@@ -28,10 +28,10 @@ void CustomSwapClass::swap(CustomSwapClass& other)
   std::swap(b_, other.b_);
 }
 
-}  // namespace util
-
 std::ostream& operator<<(std::ostream& os, const util::CustomSwapClass& mc)
 {
   mc.print(os);
   return os;
 }
+
+}  // namespace util

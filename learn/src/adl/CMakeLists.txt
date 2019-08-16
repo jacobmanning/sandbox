@@ -1,5 +1,6 @@
 add_library(ADLClasses
             CustomSwapClass.cc
+            CustomHiddenSwapClass.cc
             NoCustomSwapClass.cc)
 
 add_executable(adl_example_1
