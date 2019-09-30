@@ -3,25 +3,14 @@
 #include <map>
 #include <vector>
 
-template <template <typename, typename> class ContainerType,
-          typename ValueType,
-          typename AllocType>
-void print_container(const ContainerType<ValueType, AllocType>& c) {
-  for (const auto& v : c) {
-    std::cout << v << " ";
-  }
-  std::cout << "\n";
-}
-
 template <typename T, typename U>
 std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
   out << "[" << p.first << ", " << p.second << "]";
   return out;
 }
 
-template <template <typename, typename...> class ContainerType,
-          typename ValueType, typename... Args>
-void print_container(const ContainerType<ValueType, Args...>& c) {
+template <template <typename...> typename ContainerType, typename... Args>
+void print_container(const ContainerType<Args...>& c) {
   for (const auto& v : c) {
     std::cout << v << " ";
   }
