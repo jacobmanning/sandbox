@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <utility>
 
 namespace ClassMethodLooper
 {
 
 template <int N,
-          template <int M, typename...> class Wrapper,
+          template <int, typename...> class Wrapper,
           typename Parent,
           typename... Args>
 struct Loop
@@ -21,7 +22,7 @@ struct Loop
   }
 };
 
-template <template <int M, typename...> class Wrapper,
+template <template <int, typename...> class Wrapper,
           typename Parent,
           typename... Args>
 struct Loop<0, Wrapper, Parent, Args...>
@@ -34,7 +35,7 @@ struct Loop<0, Wrapper, Parent, Args...>
 } // namespace ClassMethodLooper
 
 template <int N,
-          template <int M, typename...> class Wrapper,
+          template <int, typename...> class Wrapper,
           typename Parent,
           typename... Args>
 void ClassMethodLoop(Parent* parent, Args&&... args)
@@ -42,35 +43,40 @@ void ClassMethodLoop(Parent* parent, Args&&... args)
   ClassMethodLooper::Loop<N, Wrapper, Parent, Args...>::impl(parent, std::forward<Args>(args)...);
 }
 
+template <int N>
 class HouseCleaner
 {
 public:
-  void clean_all(std::string&& tool)
+  template <typename... Args>
+  void clean_all(Args&&... args)
   {
-    ClassMethodLoop<4, CleanHouseWrapper>(this, std::forward<std::string>(tool));
+    ClassMethodLoop<N, CleanHouseWrapper>(this, std::forward<Args>(args)...);
   }
 
 private:
   const std::string message_{"Cleaning house #"};
 
-  template <int N, typename... Args>
+  template <int M, typename... Args>
   struct CleanHouseWrapper
   {
-    void operator()(HouseCleaner* parent, std::string&& tool) const
+    void operator()(HouseCleaner* parent, Args&&... args) const
     {
-      parent->clean_house<N>(std::forward<std::string>(tool));
+      parent->clean_house<M>(std::forward<Args>(args)...);
     }
   };
 
-  template <int N>
-  void clean_house(const std::string& tool) const
+  template <int M, typename... Args>
+  void clean_house(std::string_view tool, Args&&...) const
   {
-    std::cout << message_ << N << " with " << tool << "\n";
+    std::cout << message_ << M << " with " << tool << "\n";
   }
 };
 
 int main()
 {
-  auto cleaner = HouseCleaner();
+  auto cleaner = HouseCleaner<4>();
+
   cleaner.clean_all("broom");
+  cleaner.clean_all("vaccuum", 4);
+  cleaner.clean_all("dustpan", 3.14, "i'm running out of tools");
 }
