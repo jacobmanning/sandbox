@@ -8,39 +8,65 @@ namespace ClassMethodLooper
 
 template <int N,
           template <int, typename...> class Wrapper,
-          typename Parent,
+          typename Object,
           typename... Args>
 struct Loop
 {
-  static void impl(Parent* parent, Args&&... args)
+  // For non-const functions
+  constexpr static void impl(Object* obj_ptr, Args&&... args)
   {
-    auto member = Wrapper<N, Args...>();
+    auto member_fn_wrapper = Wrapper<N, Args...>();
+    member_fn_wrapper(obj_ptr, std::forward<Args>(args)...);
 
-    member(parent, std::forward<Args>(args)...);
+    Loop<N-1, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
+  }
 
-    Loop<N-1, Wrapper, Parent, Args...>::impl(parent, std::forward<Args>(args)...);
+  // For const functions
+  constexpr static void impl(const Object* obj_ptr, Args&&... args)
+  {
+    auto member_fn_wrapper = Wrapper<N, Args...>();
+    member_fn_wrapper(obj_ptr, std::forward<Args>(args)...);
+
+    Loop<N-1, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
   }
 };
 
 template <template <int, typename...> class Wrapper,
-          typename Parent,
+          typename Object,
           typename... Args>
-struct Loop<0, Wrapper, Parent, Args...>
+struct Loop<0, Wrapper, Object, Args...>
 {
-  static void impl([[maybe_unused]] Parent* parent, [[maybe_unused]] Args&&... args)
+  // For non-const functions
+  constexpr static void impl(Object*, Args&&...)
+  {
+  }
+
+  // For const functions
+  constexpr static void impl(const Object*, Args&&...)
   {
   }
 };
 
 } // namespace ClassMethodLooper
 
+// Wrapper for looping on a non-const member function
 template <int N,
           template <int, typename...> class Wrapper,
-          typename Parent,
+          typename Object,
           typename... Args>
-void ClassMethodLoop(Parent* parent, Args&&... args)
+constexpr void class_method_loop(Object* obj_ptr, Args&&... args)
 {
-  ClassMethodLooper::Loop<N, Wrapper, Parent, Args...>::impl(parent, std::forward<Args>(args)...);
+  ClassMethodLooper::Loop<N, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
+}
+
+// Wrapper for looping on a const member function
+template <int N,
+          template <int, typename...> class Wrapper,
+          typename Object,
+          typename... Args>
+constexpr void class_method_loop(const Object* obj_ptr, Args&&... args)
+{
+  ClassMethodLooper::Loop<N, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
 }
 
 template <int N>
@@ -48,9 +74,9 @@ class HouseCleaner
 {
 public:
   template <typename... Args>
-  void clean_all(Args&&... args)
+  void clean_all(Args&&... args) const
   {
-    ClassMethodLoop<N, CleanHouseWrapper>(this, std::forward<Args>(args)...);
+    class_method_loop<N, CleanHouseWrapper>(this, std::forward<Args>(args)...);
   }
 
 private:
@@ -59,24 +85,57 @@ private:
   template <int M, typename... Args>
   struct CleanHouseWrapper
   {
-    void operator()(HouseCleaner* parent, Args&&... args) const
+    void operator()(const HouseCleaner* obj_ptr, Args&&... args) const
     {
-      parent->clean_house<M>(std::forward<Args>(args)...);
+      obj_ptr->clean_house<M>(std::forward<Args>(args)...);
     }
   };
 
   template <int M, typename... Args>
   void clean_house(std::string_view tool, Args&&...) const
   {
-    std::cout << message_ << M << " with " << tool << "\n";
+    std::cout << message_ << M << " with " << tool << '\n';
   }
+};
+
+template <int N>
+class IntWrapper
+{
+public:
+  template <typename... Args>
+  void increment_n(Args&&... args)
+  {
+    class_method_loop<N, IncrementMutableDataMemberWrapper>(this, std::forward<Args>(args)...);
+  }
+
+private:
+  template <int M, typename... Args>
+  struct IncrementMutableDataMemberWrapper
+  {
+    void operator()(IntWrapper* obj_ptr, Args&&... args) const
+    {
+      obj_ptr->increment<M>(std::forward<Args>(args)...);
+    }
+  };
+
+  template <int M, typename... Args>
+  constexpr void increment(Args&&...)
+  {
+    mutable_data_member_ += M;
+    std::cout << "mutable_data_member_ = " << mutable_data_member_ << '\n';
+  }
+
+  int mutable_data_member_{0};
 };
 
 int main()
 {
-  auto cleaner = HouseCleaner<4>();
+  const auto cleaner = HouseCleaner<4>{};
 
   cleaner.clean_all("broom");
   cleaner.clean_all("vaccuum", 4);
   cleaner.clean_all("dustpan", 3.14, "i'm running out of tools");
+
+  auto iw = IntWrapper<5>{};
+  iw.increment_n();
 }
