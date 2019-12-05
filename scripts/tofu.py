@@ -120,7 +120,7 @@ if __name__ == "__main__":
                         default=None,
                         help='The target path to build/clean')
     parser.add_argument('-c', '--compiler', type=str, action='store',
-                        choices=['GNU', 'Clang'], default='Clang',
+                        choices=['GNU', 'Clang'], default='GNU',
                         help='The compiler to use')
     parser.add_argument('-a', '--arch', type=str, action='store',
                         choices=['x86_64', 'aarch64', 'arm'], default='x86_64',

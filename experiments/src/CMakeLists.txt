@@ -24,6 +24,9 @@ add_executable(east_west_const
 add_executable(enumerate_example
                enumerate_example.cc)
 
+add_executable(enumerate_v2_example
+               enumerate_v2_example.cc)
+
 install(TARGETS struct_by_value
                 random
                 optional_ref
@@ -32,4 +35,5 @@ install(TARGETS struct_by_value
                 smart_raw_pointers
                 east_west_const
                 enumerate_example
+                enumerate_v2_example
         DESTINATION bin)
