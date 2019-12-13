@@ -5,27 +5,40 @@ template <typename T>
 widget<T>::widget(T&& value) : value_{std::move(value)} {}
 
 template <typename T>
-void widget<T>::set_value(const T& value)
-{
+void widget<T>::set_value(const T& value) {
   ++num_changes_;
   value_ = value;
 }
 
 template <typename T>
-void widget<T>::set_value(T&& value)
-{
+void widget<T>::set_value(T&& value) {
   ++num_changes_;
+  // `value` has a name so it isn't an r-value, use std::move to
+  // unconditionally cast it to an r-value.
   value_ = std::move(value);
 }
 
 template <typename T>
-T widget<T>::get_value() const
-{
+template <typename, typename>
+T widget<T>::get_value() const {
+  std::cout << "T get_value()" << '\n';
   return value_;
 }
 
 template <typename T>
-int widget<T>::get_num_changes() const
-{
+template <typename, typename>
+const T& widget<T>::get_value() const {
+  std::cout << "const T& get_value()" << '\n';
+  return value_;
+}
+
+template <typename T>
+T& widget<T>::get_value() {
+  std::cout << "T& get_value()" << '\n';
+  return value_;
+}
+
+template <typename T>
+int widget<T>::get_num_changes() const {
   return num_changes_;
 }

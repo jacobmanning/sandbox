@@ -2,6 +2,6 @@
 
 int main()
 {
-  auto d = util::deduction_dummy{1, 2.f, true};
-  auto d2 = util::deduction_dummy{1, true};
+  auto d = util::deduction_dummy{1, true, 2.f};
+  auto d2 = util::deduction_dummy{1, 2.f};
 }
