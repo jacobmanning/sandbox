@@ -3,7 +3,11 @@
 
 struct TreeNode
 {
-  enum Kind {RED, BLUE};
+  enum Kind
+  {
+    RED,
+    BLUE
+  };
 
   Kind kind_;
   // TreeNode* left_;
@@ -15,7 +19,9 @@ struct TreeNode
   //   : kind_{k}, left_{left}, right_{right} {}
   // TreeNode(Kind k, unique_ptr<TreeNode> left=nullptr, unique_ptr<TreeNode> right=nullptr)
   //   : kind_{k}, left_{left}, right_{right} {}
-  TreeNode(Kind k) : kind_{k} {}
+  TreeNode(Kind k) : kind_{k}
+  {
+  }
 };
 
 template <typename Derived>
@@ -58,13 +64,15 @@ public:
   // void handle_red(TreeNode* node)
   void handle_red(const unique_ptr<TreeNode>& node)
   {
-    std::cout << "Generic handle RED" << "\n";
+    std::cout << "Generic handle RED"
+              << "\n";
   }
 
   // void handle_blue(TreeNode* node)
   void handle_blue(const unique_ptr<TreeNode>& node)
   {
-    std::cout << "Generic handle BLUE" << "\n";
+    std::cout << "Generic handle BLUE"
+              << "\n";
   }
 
 private:
@@ -96,7 +104,8 @@ public:
   // void handle_red(TreeNode* node)
   void handle_red(const unique_ptr<TreeNode>& node)
   {
-    std::cout << "RED is special!" << "\n";
+    std::cout << "RED is special!"
+              << "\n";
   }
 };
 
@@ -128,13 +137,13 @@ unique_ptr<TreeNode> make_tree(int num_nodes)
   bool left = true;
   auto next_parent = root;
 
-  for (int i = 0; i < num_nodes; ++i) {
+  for (int i = 0; i < num_nodes; ++i)
+  {
     make_treenode(next_parent, left);
     // Increment left
     left = !left;
     if (next_parent->left_ != nullptr && next_parent->right_ != nullptr)
     {
-      
     }
   }
 
@@ -143,5 +152,4 @@ unique_ptr<TreeNode> make_tree(int num_nodes)
 
 int main()
 {
-
 }

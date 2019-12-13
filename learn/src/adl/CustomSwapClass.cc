@@ -5,7 +5,6 @@
 
 namespace util
 {
-
 void swap(CustomSwapClass& one, CustomSwapClass& two)
 {
   std::cerr << "util::swap(CustomSwapClass&, CustomSwapClass&)\n";
@@ -34,4 +33,4 @@ std::ostream& operator<<(std::ostream& os, const util::CustomSwapClass& mc)
   return os;
 }
 
-}  // namespace util
+} // namespace util

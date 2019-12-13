@@ -11,8 +11,14 @@ public:
   Widget& operator=(const Widget&) = default;
   Widget& operator=(Widget&&) = default;
 
-  [[nodiscard]] int get_id() const { return id_; }
-  [[nodiscard]] int get_num_increments() const { return num_increments_; }
+  [[nodiscard]] int get_id() const
+  {
+    return id_;
+  }
+  [[nodiscard]] int get_num_increments() const
+  {
+    return num_increments_;
+  }
 
   void increment_id()
   {

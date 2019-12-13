@@ -1,7 +1,7 @@
+#include "widget.hh"
+
 #include <iostream>
 #include <type_traits>
-
-#include "widget.hh"
 
 struct Nontrivial
 {
@@ -14,7 +14,6 @@ struct Nontrivial
   {
     std::cout << "~Nontrivial()\n";
   }
-
 };
 
 std::ostream& operator<<(const Nontrivial&, std::ostream& out)

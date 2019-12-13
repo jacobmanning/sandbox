@@ -5,17 +5,15 @@
 
 namespace util
 {
-
 namespace impl
 {
-
 void swap(CustomHiddenSwapClass& one, CustomHiddenSwapClass& two)
 {
   std::cerr << "util::swap(CustomHiddenSwapClass&, CustomHiddenSwapClass&)\n";
   one.swap(two);
 }
 
-}  // namespace impl
+} // namespace impl
 
 CustomHiddenSwapClass::CustomHiddenSwapClass(int a, int b) : a_{a}, b_{b}
 {
@@ -39,4 +37,4 @@ std::ostream& operator<<(std::ostream& os, const util::CustomHiddenSwapClass& mc
   return os;
 }
 
-}  // namespace util
+} // namespace util

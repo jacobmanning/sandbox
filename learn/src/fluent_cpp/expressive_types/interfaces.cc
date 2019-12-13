@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <rectangle.hh>
 #include <units.hh>
 

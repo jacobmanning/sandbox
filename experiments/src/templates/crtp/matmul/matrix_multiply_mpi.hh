@@ -5,7 +5,6 @@
 
 namespace util
 {
-
 struct matrix_multiply_mpi_impl : matrix_multiply_impl<matrix_multiply_mpi_impl>
 {
   // TODO(jacobmanning)
@@ -19,4 +18,4 @@ struct matrix_multiply_mpi_impl : matrix_multiply_impl<matrix_multiply_mpi_impl>
 
 using matrix_multiply_mpi = matrix_multiply_impl<matrix_multiply_mpi_impl>;
 
-}  // namespace util
+} // namespace util

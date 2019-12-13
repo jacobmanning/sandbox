@@ -3,10 +3,11 @@
 #include <iostream>
 #include <set>
 
-namespace details {
-
+namespace details
+{
 template <typename T>
-class GraphNode {
+class GraphNode
+{
 public:
   using adjacency_list_type = std::set<std::size_t>;
 

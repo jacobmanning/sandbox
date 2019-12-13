@@ -2,9 +2,9 @@
 
 namespace v1
 {
-
-Rectangle::Rectangle(double width, double height) :
-  width_{width}, height_{height} {}
+Rectangle::Rectangle(double width, double height) : width_{width}, height_{height}
+{
+}
 
 void Rectangle::set_height(double height)
 {
@@ -31,13 +31,13 @@ double Rectangle::get_height() const
   return height_;
 }
 
-}  // namespace v1
+} // namespace v1
 
 namespace v2
 {
-
-Rectangle::Rectangle(Width width, Height height) :
-  width_{width.get()}, height_{height.get()} {}
+Rectangle::Rectangle(Width width, Height height) : width_{width.get()}, height_{height.get()}
+{
+}
 
 void Rectangle::set_height(double height)
 {
@@ -64,13 +64,14 @@ double Rectangle::get_height() const
   return height_;
 }
 
-}  // namespace v2
+} // namespace v2
 
 namespace v3
 {
-
-Rectangle::Rectangle(Width width, Height height) :
-  width_{width.get().get()}, height_{height.get().get()} {}
+Rectangle::Rectangle(Width width, Height height)
+    : width_{width.get().get()}, height_{height.get().get()}
+{
+}
 
 void Rectangle::set_height(double height)
 {
@@ -97,4 +98,4 @@ double Rectangle::get_height() const
   return height_;
 }
 
-}  // namespace v3
+} // namespace v3

@@ -5,7 +5,6 @@
 
 namespace
 {
-
 template <typename T>
 void assert_valid_remove_reference()
 {
@@ -14,7 +13,7 @@ void assert_valid_remove_reference()
   static_assert(std::is_same_v<T, std::remove_reference_t<T&&>>);
 }
 
-}  // namespace
+} // namespace
 
 int main()
 {

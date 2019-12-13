@@ -4,11 +4,12 @@
 #include <type_traits>
 #include <utility>
 
-namespace util {
-
+namespace util
+{
 template <typename T>
-class widget {
- public:
+class widget
+{
+public:
   explicit widget(const T& value);
   explicit widget(T&& value);
 
@@ -23,24 +24,22 @@ class widget {
   void set_value(T&& value);
 
   // Return trivial types by value
-  template <typename T_t = T,
-            typename = std::enable_if_t<std::is_trivial_v<T_t>>>
+  template <typename T_t = T, typename = std::enable_if_t<std::is_trivial_v<T_t>>>
   T get_value() const;
 
   // Return non-trivial types by const-ref
-  template <typename T_t = T,
-            typename = std::enable_if_t<!std::is_trivial_v<T_t>>>
+  template <typename T_t = T, typename = std::enable_if_t<!std::is_trivial_v<T_t>>>
   const T& get_value() const;
 
   T& get_value();
 
   int get_num_changes() const;
 
- private:
+private:
   T value_{};
   int num_changes_{0};
 };
 
 #include "widget.inl"
 
-}  // namespace util
+} // namespace util

@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <matrix.hh>
 #include <matrix_multiply_omp.hh>
 

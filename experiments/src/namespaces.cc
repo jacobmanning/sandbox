@@ -1,16 +1,19 @@
 #include <iostream>
 
-namespace a {
-  int x = 7;
+namespace a
+{
+int x = 7;
 }
 
-namespace b {
-  int x = 8;
+namespace b
+{
+int x = 8;
 }
 
 int x = 0;
 
-int main() {
+int main()
+{
   int x = 0;
 
   x = 1;

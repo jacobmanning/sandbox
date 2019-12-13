@@ -1,10 +1,12 @@
 template <typename T, typename Parameter>
-named_type<T, Parameter>::named_type(const T& value) :
-  value_{value} {}
+named_type<T, Parameter>::named_type(const T& value) : value_{value}
+{
+}
 
 template <typename T, typename Parameter>
-named_type<T, Parameter>::named_type(T&& value) :
-  value_{std::move(value)} {}
+named_type<T, Parameter>::named_type(T&& value) : value_{std::move(value)}
+{
+}
 
 template <typename T, typename Parameter>
 T& named_type<T, Parameter>::get()
@@ -19,8 +21,9 @@ const T& named_type<T, Parameter>::get() const
 }
 
 template <typename T, typename Parameter>
-named_type_ref<T, Parameter>::named_type_ref(T& t) :
-  t_{std::ref(t)} {}
+named_type_ref<T, Parameter>::named_type_ref(T& t) : t_{std::ref(t)}
+{
+}
 
 template <typename T, typename Parameter>
 T& named_type_ref<T, Parameter>::get()

@@ -2,16 +2,14 @@
 
 namespace util
 {
-
 // Forward declare for swap function
 class CustomHiddenSwapClass;
 
 namespace impl
 {
-
 void swap(CustomHiddenSwapClass& one, CustomHiddenSwapClass& two);
 
-}  // namespace impl
+} // namespace impl
 
 class CustomHiddenSwapClass
 {
@@ -32,4 +30,4 @@ private:
 // This operator is found by ADL even though it's in an enclosing namespace
 std::ostream& operator<<(std::ostream& os, const util::CustomHiddenSwapClass& mc);
 
-}  // namespace util
+} // namespace util

@@ -3,13 +3,12 @@
 
 namespace util
 {
-
 template <typename Arg>
 struct type_wrapper
 {
 };
 
-}  // namespace util
+} // namespace util
 
 template <typename T>
 auto create(util::type_wrapper<T>)

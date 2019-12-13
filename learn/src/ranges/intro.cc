@@ -4,7 +4,6 @@
 
 namespace util
 {
-
 auto print_element = [](const auto& element) { std::cout << element << " "; };
 
 auto is_even = [](const auto& number) { return number % 2 == 0; };

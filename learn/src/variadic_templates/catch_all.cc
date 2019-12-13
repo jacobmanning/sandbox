@@ -4,20 +4,24 @@
 #include <vector>
 
 template <typename T, typename U>
-std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
+std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p)
+{
   out << "[" << p.first << ", " << p.second << "]";
   return out;
 }
 
 template <template <typename...> typename ContainerType, typename... Args>
-void print_container(const ContainerType<Args...>& c) {
-  for (const auto& v : c) {
+void print_container(const ContainerType<Args...>& c)
+{
+  for (const auto& v : c)
+  {
     std::cout << v << " ";
   }
   std::cout << "\n";
 }
 
-int main() {
+int main()
+{
   auto my_vec = std::vector<double>{3.14, 8.1, 3.2, 1.0};
   print_container(my_vec);
 

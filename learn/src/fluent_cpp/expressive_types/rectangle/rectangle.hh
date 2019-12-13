@@ -5,7 +5,6 @@
 
 namespace v1
 {
-
 class Rectangle
 {
 public:
@@ -23,14 +22,17 @@ private:
   double height_;
 };
 
-}  // namespace v1
+} // namespace v1
 
 namespace v2
 {
-
-struct WidthParameter {};
+struct WidthParameter
+{
+};
 using Width = util::v1::named_type<double, WidthParameter>;
-struct HeightParameter {};
+struct HeightParameter
+{
+};
 using Height = util::v1::named_type<double, HeightParameter>;
 
 class Rectangle
@@ -50,14 +52,17 @@ private:
   double height_;
 };
 
-}  // namespace v2
+} // namespace v2
 
 namespace v3
 {
-
-struct WidthParameter {};
+struct WidthParameter
+{
+};
 using Width = util::v1::named_type<units::Meter, WidthParameter>;
-struct HeightParameter {};
+struct HeightParameter
+{
+};
 using Height = util::v1::named_type<units::Meter, HeightParameter>;
 
 class Rectangle
@@ -77,4 +82,4 @@ private:
   double height_;
 };
 
-}  // namespace v3
+} // namespace v3

@@ -4,11 +4,20 @@
 /// std::optional makes a copy of the argument
 /// std::optional explicitly disallows reference types as arguments
 
-class MyClass {
+class MyClass
+{
 public:
-  MyClass() : id_{0} {}
-  int get_id() const { return id_; };
-  void increment_id() { ++id_; }
+  MyClass() : id_{0}
+  {
+  }
+  int get_id() const
+  {
+    return id_;
+  };
+  void increment_id()
+  {
+    ++id_;
+  }
 
 private:
   int id_;
@@ -16,8 +25,10 @@ private:
 
 // Won't compile an optional reference
 // bool maybe_increment(std::optional<MyClass>& maybe_mc) {
-bool maybe_increment(std::optional<MyClass> maybe_mc) {
-  if (!maybe_mc) {
+bool maybe_increment(std::optional<MyClass> maybe_mc)
+{
+  if (!maybe_mc)
+  {
     return false;
   }
 
@@ -27,8 +38,10 @@ bool maybe_increment(std::optional<MyClass> maybe_mc) {
 
 // Won't compile an optional reference
 // bool maybe_increment(std::optional<int>& maybe_my_int) {
-bool maybe_increment(std::optional<int> maybe_my_int) {
-  if (!maybe_my_int) {
+bool maybe_increment(std::optional<int> maybe_my_int)
+{
+  if (!maybe_my_int)
+  {
     return false;
   }
 
@@ -36,16 +49,19 @@ bool maybe_increment(std::optional<int> maybe_my_int) {
   return true;
 }
 
-int main() {
+int main()
+{
   auto mc = MyClass();
   int my_int = 4;
 
-  if (maybe_increment(mc)) {
+  if (maybe_increment(mc))
+  {
     std::cout << "Incremented mc" << '\n';
     std::cout << "mc.get_id() = " << mc.get_id() << '\n';
   }
 
-  if (maybe_increment(my_int)) {
+  if (maybe_increment(my_int))
+  {
     std::cout << "Incremented my_int" << '\n';
     std::cout << "my_int = " << my_int << '\n';
   }

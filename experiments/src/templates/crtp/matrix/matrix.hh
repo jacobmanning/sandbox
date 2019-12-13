@@ -10,7 +10,6 @@
 
 namespace util
 {
-
 template <typename T,
           std::size_t R,
           std::size_t C,
@@ -42,7 +41,7 @@ public:
     auto dev = std::random_device{};
     auto rng = std::mt19937{dev()};
     auto dist = std::uniform_int_distribution<std::mt19937::result_type>(low, high);
-    auto random_generator = [&rng, &dist] () { return dist(rng); };
+    auto random_generator = [&rng, &dist]() { return dist(rng); };
 
     std::generate(std::begin(data_), std::end(data_), random_generator);
   }
@@ -61,10 +60,13 @@ public:
   {
     auto i = int{0};
 
-    std::for_each(std::begin(data_), std::end(data_), [&i, &os] (auto& elem) {
+    std::for_each(std::begin(data_), std::end(data_), [&i, &os](auto& elem) {
       os << elem << ' ';
       // Print newline after C elements
-      if (++i % C == 0) { os << '\n'; }
+      if (++i % C == 0)
+      {
+        os << '\n';
+      }
     });
   }
 
@@ -72,4 +74,4 @@ private:
   std::array<T, R * C> data_;
 };
 
-}  // namespace util
+} // namespace util

@@ -13,7 +13,8 @@ struct Derived : Base<Derived>
 {
   void impl()
   {
-    std::cerr << "Derived implementation" << "\n";
+    std::cerr << "Derived implementation"
+              << "\n";
   }
 };
 

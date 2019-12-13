@@ -5,7 +5,6 @@
 
 namespace util
 {
-
 struct matrix_multiply_omp_impl : matrix_multiply_impl<matrix_multiply_omp_impl>
 {
   template <typename T, std::size_t R1, std::size_t S, std::size_t C2>
@@ -13,7 +12,7 @@ struct matrix_multiply_omp_impl : matrix_multiply_impl<matrix_multiply_omp_impl>
   {
     auto result = matrix<T, R1, C2>{0};
 
-    #pragma omp parallel for collapse(3)
+#pragma omp parallel for collapse(3)
     for (auto i = int{0}; i < R1; ++i)
     {
       for (auto j = int{0}; j < S; ++j)
@@ -31,4 +30,4 @@ struct matrix_multiply_omp_impl : matrix_multiply_impl<matrix_multiply_omp_impl>
 
 using matrix_multiply_omp = matrix_multiply_impl<matrix_multiply_omp_impl>;
 
-}  // namespace util
+} // namespace util

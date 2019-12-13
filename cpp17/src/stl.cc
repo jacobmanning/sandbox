@@ -1,10 +1,11 @@
+#include "util.h"
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
 
-#include "util.h"
-
-void transform_demo() {
+void transform_demo()
+{
   // Config parameters
   const int size = 10;
   const int fill_value = 17;
@@ -20,8 +21,9 @@ void transform_demo() {
   results.push_back(0);
 
   // Add each element to itself and append to results
-  std::transform(std::begin(vec), std::end(vec), std::back_inserter(results),
-                 [] (const auto x) { return x + x; });
+  std::transform(std::begin(vec), std::end(vec), std::back_inserter(results), [](const auto x) {
+    return x + x;
+  });
 
   // Print results
   std::cout << "Original vector:" << '\n';
@@ -30,12 +32,15 @@ void transform_demo() {
   util::print_vector(results);
 }
 
-void dummy_demo() {}
+void dummy_demo()
+{
+}
 
 // All demo functions should follow this format
 using demo_function_t = decltype(&transform_demo);
 
-void announce_and_execute(const std::string& name, demo_function_t demo_fn) {
+void announce_and_execute(const std::string& name, demo_function_t demo_fn)
+{
   // Common strings to print
   const auto suffix = std::string{" Demo:\n"};
   const auto sep = std::string{"****************************\n"};
@@ -50,7 +55,8 @@ void announce_and_execute(const std::string& name, demo_function_t demo_fn) {
   std::cout << sep << '\n';
 }
 
-int main() {
+int main()
+{
   // List of demo names and related function pointer
   const auto demo_list = std::vector<std::pair<std::string, demo_function_t>>{
       {"Transform", transform_demo},
@@ -59,6 +65,7 @@ int main() {
 
   // Apply the `announce_and_execute` function to all [name, function] pairs
   // in the list of demos
-  std::for_each(std::begin(demo_list), std::end(demo_list),
-                [] (auto& p) { std::apply(announce_and_execute, p); });
+  std::for_each(std::begin(demo_list), std::end(demo_list), [](auto& p) {
+    std::apply(announce_and_execute, p);
+  });
 }

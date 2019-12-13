@@ -5,7 +5,6 @@
 
 namespace util
 {
-
 NoCustomSwapClass::NoCustomSwapClass(int a, int b) : a_{a}, b_{b}
 {
 }
@@ -21,4 +20,4 @@ std::ostream& operator<<(std::ostream& os, const util::NoCustomSwapClass& mc)
   return os;
 }
 
-}  // namespace util
+} // namespace util

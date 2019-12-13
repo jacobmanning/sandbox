@@ -1,13 +1,11 @@
 #pragma once
 
-#include <ostream>
-
 #include <crtp.hh>
 #include <named_type.hh>
+#include <ostream>
 
 namespace traits
 {
-
 template <typename T>
 struct Addable : util::crtp<T, Addable>
 {
@@ -67,10 +65,9 @@ struct FunctionCallable;
 template <typename NamedType_>
 struct MethodCallable;
 
-template <typename T, typename Tag,
-          template <typename> class... Skills>
-struct FunctionCallable<util::v3::named_type<T, Tag, Skills...>> :
-  util::crtp<util::v3::named_type<T, Tag, Skills...>, FunctionCallable>
+template <typename T, typename Tag, template <typename> class... Skills>
+struct FunctionCallable<util::v3::named_type<T, Tag, Skills...>>
+    : util::crtp<util::v3::named_type<T, Tag, Skills...>, FunctionCallable>
 {
   // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
@@ -78,20 +75,17 @@ struct FunctionCallable<util::v3::named_type<T, Tag, Skills...>> :
   operator T&();
 };
 
-template <typename T, typename Tag,
-          template <typename> class... Skills>
-struct MethodCallable<util::v3::named_type<T, Tag, Skills...>> :
-  util::crtp<util::v3::named_type<T, Tag, Skills...>, MethodCallable>
+template <typename T, typename Tag, template <typename> class... Skills>
+struct MethodCallable<util::v3::named_type<T, Tag, Skills...>>
+    : util::crtp<util::v3::named_type<T, Tag, Skills...>, MethodCallable>
 {
   const T* operator->() const;
   T* operator->();
 };
 
-template <typename T, typename Tag,
-          typename Converter,
-          template <typename> class... Skills>
-struct FunctionCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>> :
-  util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, FunctionCallable>
+template <typename T, typename Tag, typename Converter, template <typename> class... Skills>
+struct FunctionCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>>
+    : util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, FunctionCallable>
 {
   // NOLINTNEXTLINE(hicpp-explicit-conversions,google-explicit-constructor)
   operator const T&() const;
@@ -99,11 +93,9 @@ struct FunctionCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>>
   operator T&();
 };
 
-template <typename T, typename Tag,
-          typename Converter,
-          template <typename> class... Skills>
-struct MethodCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>> :
-  util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, MethodCallable>
+template <typename T, typename Tag, typename Converter, template <typename> class... Skills>
+struct MethodCallable<util::v4::named_type_impl<T, Tag, Converter, Skills...>>
+    : util::crtp<util::v4::named_type_impl<T, Tag, Converter, Skills...>, MethodCallable>
 {
   const T* operator->() const;
   T* operator->();
@@ -116,6 +108,6 @@ struct Callable : FunctionCallable<NamedType_>, MethodCallable<NamedType_>
 
 #include <traits.inl>
 
-}  // namespace traits
+} // namespace traits
 
 #include <traits_operators.inl>

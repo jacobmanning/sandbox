@@ -1,7 +1,7 @@
+#include <Eigen/Core>
 #include <iostream>
 
-#include <Eigen/Core>
-
-int main() {
-    std::cout << "Hello, Eigen!" << '\n';
+int main()
+{
+  std::cout << "Hello, Eigen!" << '\n';
 }

@@ -2,9 +2,7 @@
 
 namespace util
 {
-
-template <typename T,
-          template <typename> class CRTPType>
+template <typename T, template <typename> class CRTPType>
 struct crtp
 {
   T& underlying();
@@ -17,4 +15,4 @@ private:
 
 #include <crtp.inl>
 
-}  // namespace util
+} // namespace util

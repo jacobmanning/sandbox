@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <units.hh>
 
 void print_distance(const units::Meter x)

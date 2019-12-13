@@ -1,8 +1,9 @@
-#include <iostream>
-
 #include "DirectedGraph.hh"
 
-int main() {
+#include <iostream>
+
+int main()
+{
   auto graph = DirectedGraph<int>();
 
   graph.insert(11);

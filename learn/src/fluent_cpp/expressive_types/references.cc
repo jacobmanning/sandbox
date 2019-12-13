@@ -1,13 +1,12 @@
 #include <iostream>
+#include <named_type.hh>
 #include <string>
 
-#include <named_type.hh>
-
-struct FirstNameRefParameter {};
-using name_ref_v1 =
-  util::v1::named_type_ref<std::string, struct FirstNameRefParameter>;
-using name_ref_v2 =
-  util::v2::named_type<std::string&, struct FirstNameRefParameter>;
+struct FirstNameRefParameter
+{
+};
+using name_ref_v1 = util::v1::named_type_ref<std::string, struct FirstNameRefParameter>;
+using name_ref_v2 = util::v2::named_type<std::string&, struct FirstNameRefParameter>;
 
 void print_name(const name_ref_v1 name)
 {

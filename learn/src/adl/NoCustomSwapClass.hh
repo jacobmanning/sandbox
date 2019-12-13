@@ -2,7 +2,6 @@
 
 namespace util
 {
-
 class NoCustomSwapClass
 {
 public:
@@ -19,4 +18,4 @@ private:
 // This operator is found by ADL even though it's in an enclosing namespace
 std::ostream& operator<<(std::ostream& os, const util::NoCustomSwapClass& mc);
 
-}  // namespace util
+} // namespace util

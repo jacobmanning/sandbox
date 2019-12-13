@@ -1,12 +1,12 @@
-#include "CustomSwapClass.hh"
 #include "CustomHiddenSwapClass.hh"
+#include "CustomSwapClass.hh"
 #include "NoCustomSwapClass.hh"
 
 #include <algorithm>
 #include <iostream>
 
-using util::CustomSwapClass;
 using util::CustomHiddenSwapClass;
+using util::CustomSwapClass;
 using util::NoCustomSwapClass;
 
 /// @brief Uses ADL to find appropriate swap

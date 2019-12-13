@@ -10,8 +10,7 @@ public:
     std::cout << "f(const T&)" << '\n';
   }
 
-  template <typename T_ = T,
-            typename = std::enable_if_t<!std::is_reference_v<T_>>>
+  template <typename T_ = T, typename = std::enable_if_t<!std::is_reference_v<T_>>>
   void f([[maybe_unused]] T&& x)
   {
     std::cout << "f(T&&)" << '\n';

@@ -4,7 +4,6 @@
 
 namespace v1
 {
-
 class Radius
 {
 public:
@@ -43,15 +42,18 @@ private:
   double radius_;
 };
 
-}  // namespace v1
+} // namespace v1
 
 namespace v2
 {
-
-struct RadiusParameter {};
+struct RadiusParameter
+{
+};
 using Radius = util::v1::named_type<double, struct RadiusParameter>;
 
-struct DiameterParameter {};
+struct DiameterParameter
+{
+};
 using Diameter = util::v1::named_type<double, struct DiameterParameter>;
 
 class Circle
@@ -70,4 +72,4 @@ private:
   double radius_;
 };
 
-}  // namespace v2
+} // namespace v2

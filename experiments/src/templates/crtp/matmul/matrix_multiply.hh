@@ -4,7 +4,6 @@
 
 namespace util
 {
-
 struct matrix_multiply_naive_impl;
 
 template <typename Runtime = matrix_multiply_naive_impl>
@@ -47,4 +46,4 @@ struct matrix_multiply_naive_impl : matrix_multiply_impl<matrix_multiply_naive_i
 
 using matrix_multiply = matrix_multiply_impl<>;
 
-}  // namespace util
+} // namespace util

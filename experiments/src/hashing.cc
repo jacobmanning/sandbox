@@ -1,12 +1,13 @@
-#include <iostream>
 #include <fstream>
 #include <functional>
+#include <iostream>
 #include <optional>
 #include <string>
 
 /// @brief Reads a string from the user via the console and hashes it
 /// @return The hash of the string the user inputs
-unsigned long get_string_and_hash() {
+unsigned long get_string_and_hash()
+{
   std::cout << "Enter a string to hash: ";
   auto my_string = std::string{};
   std::getline(std::cin, my_string);
@@ -20,9 +21,11 @@ unsigned long get_string_and_hash() {
 /// @param filename The filename to write the hash to
 /// @param my_hash The hash to write to the file
 /// @return The success of opening the filename for writing
-bool write_hash_to_file(const std::string& filename, const unsigned long my_hash) {
+bool write_hash_to_file(const std::string& filename, const unsigned long my_hash)
+{
   auto out_file = std::ofstream{filename, std::ios::out};
-  if (!out_file.is_open()) {
+  if (!out_file.is_open())
+  {
     std::cerr << "Could not open output file" << '\n';
     return false;
   }
@@ -37,9 +40,11 @@ bool write_hash_to_file(const std::string& filename, const unsigned long my_hash
 /// @param filename The filename to read the hash from
 /// @return An optional to the hash. If the input file cannot be opened,
 ///         an empty optional will be returned
-std::optional<unsigned long> read_hash_from_file(const std::string& filename) {
+std::optional<unsigned long> read_hash_from_file(const std::string& filename)
+{
   auto in_file = std::ifstream{filename, std::ios::in};
-  if (!in_file.is_open()) {
+  if (!in_file.is_open())
+  {
     std::cerr << "Could not open input file" << '\n';
     return {};
   }
@@ -50,7 +55,8 @@ std::optional<unsigned long> read_hash_from_file(const std::string& filename) {
 }
 
 /// @brief Main function
-int main() {
+int main()
+{
   // The filename to write/read the hash to/from
   const auto hash_filename = std::string("hash_file.txt");
 
@@ -59,19 +65,22 @@ int main() {
   std::cout << "Hashed: " << my_hash << '\n';
 
   // Write the user's hash to the file
-  if (!write_hash_to_file(hash_filename, my_hash)) {
+  if (!write_hash_to_file(hash_filename, my_hash))
+  {
     std::cerr << "Could not write hash to file: " << hash_filename << '\n';
     return 1;
   }
 
   // Read the hash from the file
   const auto hash_from_file = read_hash_from_file(hash_filename);
-  if (!hash_from_file) {
+  if (!hash_from_file)
+  {
     std::cerr << "Could not read hash from file: " << hash_filename << '\n';
     return 1;
   }
 
-  if (my_hash != *hash_from_file) {
+  if (my_hash != *hash_from_file)
+  {
     std::cerr << "Hashes do NOT match!" << '\n';
     return 1;
   }

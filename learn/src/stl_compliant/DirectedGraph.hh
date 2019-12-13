@@ -3,18 +3,22 @@
 #include <algorithm>
 #include <iostream>
 // #include <iterator>
+#include "GraphNode.hh"
+
 #include <set>
 #include <vector>
 
-#include "GraphNode.hh"
-
 // Forward-declare helper classes
-template<class DG> class const_directed_graph_iterator;
-template<class DG> class adjacent_nodes_iterator;
-template<class DG> class const_adjacent_nodes_iterator;
+template <class DG>
+class const_directed_graph_iterator;
+template <class DG>
+class adjacent_nodes_iterator;
+template <class DG>
+class const_adjacent_nodes_iterator;
 
 template <typename T>
-class DirectedGraph {
+class DirectedGraph
+{
 public:
   friend class const_directed_graph_iterator<DirectedGraph>;
 
@@ -35,7 +39,8 @@ public:
   using const_iterator_adjacent_nodes = const_adjacent_nodes_iterator<DirectedGraph>;
 
   using reverse_iterator_adjacent_nodes = std::reverse_iterator<iterator_adjacent_nodes>;
-  using const_reverse_iterator_adjacent_nodes = std::reverse_iterator<const_iterator_adjacent_nodes>;
+  using const_reverse_iterator_adjacent_nodes =
+      std::reverse_iterator<const_iterator_adjacent_nodes>;
 
   DirectedGraph() = default;
   DirectedGraph(std::initializer_list<T> init);
@@ -125,19 +130,18 @@ private:
 
   std::set<T> get_adjacent_node_values(
       const typename details::GraphNode<T>::adjacency_list_type& indices) const;
-
 };
 
 template <typename DG>
-class const_directed_graph_iterator {
+class const_directed_graph_iterator
+{
 public:
   using value_type = typename DG::value_type;
   using difference_type = std::ptrdiff_t;
   using iterator_category = std::bidirectional_iterator_tag;
   using pointer = const value_type*;
   using reference = const value_type&;
-  using iterator_type =
-    typename DG::nodes_container_type::const_iterator;
+  using iterator_type = typename DG::nodes_container_type::const_iterator;
 
   const_directed_graph_iterator() = default;
   const_directed_graph_iterator(iterator_type it, const DG* graph);
@@ -165,7 +169,8 @@ protected:
 };
 
 template <typename DG>
-class directed_graph_iterator : public const_directed_graph_iterator<DG> {
+class directed_graph_iterator : public const_directed_graph_iterator<DG>
+{
 public:
   using value_type = typename DG::value_type;
   using difference_type = std::ptrdiff_t;
@@ -187,15 +192,17 @@ public:
   directed_graph_iterator operator--(int);
 };
 
-template<typename DG>
-class const_adjacent_nodes_iterator {
+template <typename DG>
+class const_adjacent_nodes_iterator
+{
 public:
   using value_type = typename details::GraphNode<typename DG::value_type>::adjacency_list_type;
   using difference_type = std::ptrdiff_t;
   using iterator_category = std::bidirectional_iterator_tag;
   using pointer = value_type*;
   using reference = value_type&;
-  using iterator_type = typename details::GraphNode<typename DG::value_type>::adjacency_list_type::iterator;
+  using iterator_type =
+      typename details::GraphNode<typename DG::value_type>::adjacency_list_type::iterator;
 
   const_adjacent_nodes_iterator() = default;
   const_adjacent_nodes_iterator(iterator_type it, const DG* graph);
@@ -223,14 +230,16 @@ protected:
 };
 
 template <typename DG>
-class adjacent_nodes_iterator : public const_adjacent_nodes_iterator<DG> {
+class adjacent_nodes_iterator : public const_adjacent_nodes_iterator<DG>
+{
 public:
   using value_type = typename details::GraphNode<typename DG::value_type>::adjacency_list_type;
   using difference_type = std::ptrdiff_t;
   using iterator_category = std::bidirectional_iterator_tag;
   using pointer = value_type*;
   using reference = value_type&;
-  using iterator_type = typename details::GraphNode<typename DG::value_type>::adjacency_list_type::iterator;
+  using iterator_type =
+      typename details::GraphNode<typename DG::value_type>::adjacency_list_type::iterator;
 
   adjacent_nodes_iterator() = default;
   adjacent_nodes_iterator(iterator_type it, const DG* graph);
@@ -255,5 +264,5 @@ template <typename T>
 void swap(DirectedGraph<T>& first, DirectedGraph<T>& second);
 
 #include "DirectedGraph.inl"
-#include "GraphIterators.inl"
 #include "GraphHelpers.inl"
+#include "GraphIterators.inl"

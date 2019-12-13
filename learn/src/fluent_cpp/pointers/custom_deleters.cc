@@ -4,7 +4,7 @@ class Instructions
 {
 public:
   virtual std::unique_ptr<Instructions> clone() const = 0;
-  virtual ~Instructions() {};
+  virtual ~Instructions(){};
 };
 
 class Sketch : public Instructions
@@ -12,8 +12,7 @@ class Sketch : public Instructions
 public:
   std::unique_ptr<Instructions> clone() const
   {
-    return static_cast<std::unique_ptr<Instructions>>(
-        std::make_unique<Sketch>(*this));
+    return static_cast<std::unique_ptr<Instructions>>(std::make_unique<Sketch>(*this));
   }
 };
 
@@ -22,26 +21,21 @@ class Blueprint : public Instructions
 public:
   std::unique_ptr<Instructions> clone() const
   {
-    return static_cast<std::unique_ptr<Instructions>>(
-        std::make_unique<Blueprint>(*this));
+    return static_cast<std::unique_ptr<Instructions>>(std::make_unique<Blueprint>(*this));
   }
 };
 
-using InstructionsUniquePtr =
-  std::unique_ptr<const Instructions, void(*)(const Instructions*)>;
+using InstructionsUniquePtr = std::unique_ptr<const Instructions, void (*)(const Instructions*)>;
 
-auto delete_instructions = [] (const Instructions* instr) {
-  delete instr;
-};
+auto delete_instructions = [](const Instructions* instr) { delete instr; };
 
-auto do_not_delete_instructions = [] ([[maybe_unused]] const Instructions* instr) {};
+auto do_not_delete_instructions = []([[maybe_unused]] const Instructions* instr) {};
 
 class House
 {
 public:
   // explicit House(std::unique_ptr<Instructions> instructions) :
-  explicit House(InstructionsUniquePtr instructions) :
-    instructions_{std::move(instructions)} {};
+  explicit House(InstructionsUniquePtr instructions) : instructions_{std::move(instructions)} {};
 
 private:
   // std::unique_ptr<Instructions> instructions_;
@@ -77,4 +71,6 @@ void build_with_stack_object()
   auto house = House(InstructionsUniquePtr(&blueprint, do_not_delete_instructions));
 }
 
-int main() {}
+int main()
+{
+}

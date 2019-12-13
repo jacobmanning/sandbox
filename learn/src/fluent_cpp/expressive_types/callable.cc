@@ -1,12 +1,10 @@
 #include <algorithm>
 #include <iostream>
-#include <string>
-
 #include <named_type.hh>
+#include <string>
 #include <traits.hh>
 
-using Label =
-  util::v3::named_type<std::string, struct LabelTag, traits::Callable>;
+using Label = util::v3::named_type<std::string, struct LabelTag, traits::Callable>;
 
 std::string just_return_my_string(const std::string& s)
 {

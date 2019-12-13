@@ -5,7 +5,6 @@
 
 namespace
 {
-
 template <typename T>
 void assert_valid_add_reference()
 {
@@ -13,7 +12,7 @@ void assert_valid_add_reference()
   static_assert(std::is_same_v<T&&, std::add_rvalue_reference_t<T>>);
 }
 
-}  // namespace
+} // namespace
 
 int main()
 {

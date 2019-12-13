@@ -5,8 +5,9 @@
 template <typename Printable>
 struct RepeatPrinter : Printable
 {
-  explicit RepeatPrinter(const Printable& printable) :
-    Printable{printable} {}
+  explicit RepeatPrinter(const Printable& printable) : Printable{printable}
+  {
+  }
 
   void repeat(unsigned int n) const
   {
@@ -26,9 +27,10 @@ RepeatPrinter<Printable> make_repeat_printer(const Printable& printable)
 class Name
 {
 public:
-  Name(std::string first_name, std::string last_name) :
-    first_name_{std::move(first_name)},
-    last_name_{std::move(last_name)} {}
+  Name(std::string first_name, std::string last_name)
+      : first_name_{std::move(first_name)}, last_name_{std::move(last_name)}
+  {
+  }
 
   void print(std::ostream& os = std::cout) const
   {

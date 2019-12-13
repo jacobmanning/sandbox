@@ -1,6 +1,5 @@
-#include <iostream>
-
 #include <circle.hh>
+#include <iostream>
 
 int main()
 {
