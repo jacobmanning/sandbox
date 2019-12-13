@@ -1,20 +1,22 @@
 #pragma once
 
+#include <cstdint>
 #include <named_type.hh>
 #include <traits.hh>
 
-#include <cstdint>
-
 namespace units
 {
-
-using Meter = util::convertible_named_type<double, struct DistanceTag,
-      traits::Addable, traits::Subtractable, traits::Multiplicable,
-      traits::Divisible, traits::Printable>;
+using Meter = util::convertible_named_type<double,
+                                           struct DistanceTag,
+                                           traits::Addable,
+                                           traits::Subtractable,
+                                           traits::Multiplicable,
+                                           traits::Divisible,
+                                           traits::Printable>;
 
 using Kilometer = util::multiple_of<Meter, std::kilo>;
 
-}  // namespace units
+} // namespace units
 
 // NOLINTNEXTLINE(google-runtime-int)
 units::Meter operator"" _meter(unsigned long long value);

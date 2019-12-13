@@ -1,13 +1,14 @@
 #include <memory>
 
-struct Wood {};
+struct Wood
+{
+};
 
 class House
 {
 public:
   // House takes ownership of the wood
-  explicit House([[maybe_unused]] std::unique_ptr<Wood> wood) :
-    wood_{std::move(wood)} {};
+  explicit House(std::unique_ptr<Wood> wood) : wood_{std::move(wood)} {};
 
 private:
   std::unique_ptr<Wood> wood_;
@@ -35,7 +36,7 @@ void moving_unique_pointers()
 }
 
 // Ideally want to pass objects as const ref
-void render_house([[maybe_unused]] const House& house) {};
+void render_house([[maybe_unused]] const House& house){};
 
 // Raw pointers and references represent access to an object,
 // but not ownership of it
@@ -73,4 +74,6 @@ void weak_ptr_to_avoid_circular_ref()
   s2->neighbor_ = s1;
 }
 
-int main() {}
+int main()
+{
+}

@@ -5,44 +5,22 @@
 
 namespace ClassMethodLooper
 {
-
-template <int N,
-          template <int, typename...> class Wrapper,
-          typename Object,
-          typename... Args>
+template <int N, template <int, typename...> class Wrapper, typename Object, typename... Args>
 struct Loop
 {
-  // For non-const functions
   constexpr static void impl(Object* obj_ptr, Args&&... args)
   {
     auto member_fn_wrapper = Wrapper<N, Args...>();
     member_fn_wrapper(obj_ptr, std::forward<Args>(args)...);
 
-    Loop<N-1, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
-  }
-
-  // For const functions
-  constexpr static void impl(const Object* obj_ptr, Args&&... args)
-  {
-    auto member_fn_wrapper = Wrapper<N, Args...>();
-    member_fn_wrapper(obj_ptr, std::forward<Args>(args)...);
-
-    Loop<N-1, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
+    Loop<N - 1, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
   }
 };
 
-template <template <int, typename...> class Wrapper,
-          typename Object,
-          typename... Args>
+template <template <int, typename...> class Wrapper, typename Object, typename... Args>
 struct Loop<0, Wrapper, Object, Args...>
 {
-  // For non-const functions
   constexpr static void impl(Object*, Args&&...)
-  {
-  }
-
-  // For const functions
-  constexpr static void impl(const Object*, Args&&...)
   {
   }
 };
@@ -50,21 +28,8 @@ struct Loop<0, Wrapper, Object, Args...>
 } // namespace ClassMethodLooper
 
 // Wrapper for looping on a non-const member function
-template <int N,
-          template <int, typename...> class Wrapper,
-          typename Object,
-          typename... Args>
+template <int N, template <int, typename...> class Wrapper, typename Object, typename... Args>
 constexpr void class_method_loop(Object* obj_ptr, Args&&... args)
-{
-  ClassMethodLooper::Loop<N, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
-}
-
-// Wrapper for looping on a const member function
-template <int N,
-          template <int, typename...> class Wrapper,
-          typename Object,
-          typename... Args>
-constexpr void class_method_loop(const Object* obj_ptr, Args&&... args)
 {
   ClassMethodLooper::Loop<N, Wrapper, Object, Args...>::impl(obj_ptr, std::forward<Args>(args)...);
 }
@@ -80,7 +45,7 @@ public:
   }
 
 private:
-  const std::string message_{"Cleaning house #"};
+  std::string message_{"Cleaning house #"};
 
   template <int M, typename... Args>
   struct CleanHouseWrapper
@@ -119,7 +84,7 @@ private:
   };
 
   template <int M, typename... Args>
-  constexpr void increment(Args&&...)
+  void increment(Args&&...)
   {
     mutable_data_member_ += M;
     std::cout << "mutable_data_member_ = " << mutable_data_member_ << '\n';
