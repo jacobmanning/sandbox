@@ -41,9 +41,9 @@ const T& widget<T>::get_value() const
 }
 
 template <typename T>
-T& widget<T>::get_value()
+T& widget<T>::get_value_mutable()
 {
-  std::cout << "T& get_value()" << '\n';
+  std::cout << "T& get_value_mutable()" << '\n';
   return value_;
 }
 

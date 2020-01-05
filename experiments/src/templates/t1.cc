@@ -30,6 +30,10 @@ int main()
   std::cout << "w.value_ = " << w.get_value() << '\n';
   std::cout << "w.num_changes_ = " << w.get_num_changes() << '\n';
 
+  auto& w_value_mut = w.get_value_mutable();
+  w_value_mut = 3;
+  std::cout << "w.value_ = " << w.get_value() << '\n';
+
   const auto w2 = util::widget<float>(4.f);
   std::cout << "w2.value_ = " << w2.get_value() << '\n';
 
