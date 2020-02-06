@@ -6,8 +6,6 @@
 #include <random>
 #include <type_traits>
 
-// TODO: Make constexpr
-
 namespace util
 {
 template <typename T,
@@ -24,11 +22,11 @@ public:
     fill(fill_value);
   }
 
-  // ~matrix() = default;
-  // matrix(const matrix&) = default;
-  // matrix(matrix&&) noexcept = default;
-  // matrix& operator=(const matrix&) = default;
-  // matrix& operator=(matrix&&) noexcept = default;
+  ~matrix() = default;
+  matrix(const matrix&) = default;
+  matrix(matrix&&) noexcept = default;
+  matrix& operator=(const matrix&) = default;
+  matrix& operator=(matrix&&) noexcept = default;
 
   void fill(const T& fill_value)
   {
@@ -58,14 +56,17 @@ public:
 
   void print(std::ostream& os = std::cout) const
   {
-    auto i = int{0};
+    std::for_each(std::begin(data_), std::end(data_), [i = 0, &os](auto& elem) mutable {
+      os << elem;
 
-    std::for_each(std::begin(data_), std::end(data_), [&i, &os](auto& elem) {
-      os << elem << ' ';
       // Print newline after C elements
       if (++i % C == 0)
       {
         os << '\n';
+      }
+      else
+      {
+        os << ' ';
       }
     });
   }

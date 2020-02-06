@@ -1,5 +1,3 @@
-set(CMAKE_BUILD_TYPE Debug)
-
 add_library(matrix INTERFACE)
 target_include_directories(matrix INTERFACE
                            matrix/)

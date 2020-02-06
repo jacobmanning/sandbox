@@ -14,9 +14,9 @@ private:
   std::decay_t<decltype(std::end(std::declval<Rangeable>()))> end_;
 
 public:
-  Enumerator(Rangeable&& r)
-      : index_{0}, begin_{std::begin(std::forward<Rangeable>(r))}, end_{std::end(
-                                                                       std::forward<Rangeable>(r))}
+  Enumerator(Rangeable&& r) : index_{0},
+                              begin_{std::begin(std::forward<Rangeable>(r))},
+                              end_{std::end(std::forward<Rangeable>(r))}
   {
   }
 
