@@ -6,20 +6,20 @@ This repository is my sandbox to play around with nifty tools/libraries/etc.
 The repo uses a python-automated CMake build system.
 
 #### Setting up the build system
-The build system, `tofu`, uses python to automate CMake. You can call commands as `python scripts/tofu.py <arguments>` or set up an alias for `tofu=python scripts/tofu.py` via the shell script.
+The build system, `sandbox`, uses python to automate CMake. You can call commands as `python scripts/sandbox.py <arguments>` or set up an alias for `sandbox=python scripts/sandbox.py` via the shell script.
 ```bash
 scripts/setup_paths.sh
 ```
 
 #### Building a target
 ```
-tofu build <directory>
+sandbox build <directory>
 ```
 + Can also specify a compiler or target architecture via flags
 
 #### Cleaning a target
 ```
-tofu clean <directory>
+sandbox clean <directory>
 ```
 
 #### Running a target

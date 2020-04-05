@@ -13,8 +13,7 @@ template <class T>
 void print_vector(const std::vector<T>& v)
 {
   // Print all elements
-  std::for_each(std::begin(v), std::end(v), [](const T& n) { std::cout << n << " "; });
-
+  std::for_each(std::begin(v), std::end(v), [](const T& n) { std::cout << n << ' '; });
   // Print separator
   std::cout << "\n\n";
 }
@@ -25,7 +24,7 @@ namespace impl
 template <class Tuple, std::size_t... Indices>
 void print_tuple(const Tuple& t, std::ostream& os, std::index_sequence<Indices...>)
 {
-  ((os << std::get<Indices>(t) << " "), ...);
+  ((os << std::get<Indices>(t) << ' '), ...);
   os << '\n';
 }
 

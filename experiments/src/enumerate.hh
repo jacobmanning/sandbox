@@ -37,9 +37,7 @@ template <
         RequireInvocableBinaryOperandFunction<BinaryOperandFunction, int, LoopElementType, void>>
 auto enumerate(InputIt begin, InputIt end, BinaryOperandFunction loop_body)
 {
-  auto i = int{0};
-
-  auto runnable_loop_body = [&i, &loop_body](auto&& element) {
+  auto runnable_loop_body = [i = 0, loop_body = std::move(loop_body)](auto&& element) mutable {
     loop_body(i++, std::forward<decltype(element)>(element));
   };
 

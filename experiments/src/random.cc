@@ -23,7 +23,7 @@ template <class T>
 void print_vector(const std::vector<T>& vec)
 {
   std::for_each(std::begin(vec), std::end(vec), [](const T& element) {
-    std::cout << element << " ";
+    std::cout << element << ' ';
   });
   std::cout << '\n';
 }
@@ -39,7 +39,7 @@ std::vector<T> vector_intersection(const std::vector<T>& v1, const std::vector<T
 {
   auto common = std::vector<T>();
 
-  // No sorting needed ()
+  // No sorting needed
   std::copy_if(std::begin(v1), std::end(v1), std::back_inserter(common), [&v2](const auto& el1) {
     auto it =
         std::find_if(std::begin(v2), std::end(v2), [&el1](const auto& el2) { return el1 == el2; });

@@ -35,6 +35,10 @@ def check_target(target):
     LOG_INFO('Found target "{}"'.format(target))
 
 def build(target, compiler, arch):
+    if target is None:
+        LOG_ERROR('Please specify a target to build')
+        return
+
     toolchain_path = os.path.join(os.getcwd(), config['build_utils_dir'],
                                   config['toolchains_dir'])
     toolchain_name = '{}-{}-toolchain.cmake'.format(arch, compiler)

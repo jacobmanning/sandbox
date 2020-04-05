@@ -2,8 +2,8 @@
 
 # Bash
 echo "" >> ~/.bashrc
-echo "alias tofu=\"python ./scripts/tofu.py\"" >> ~/.bashrc
+echo "alias sandbox=\"python ./scripts/sandbox.py\"" >> ~/.bashrc
 
 # Zsh
 echo "" >> ~/.zshrc
-echo "alias tofu=\"python ./scripts/tofu.py\"" >> ~/.zshrc
+echo "alias sandbox=\"python ./scripts/sandbox.py\"" >> ~/.zshrc
